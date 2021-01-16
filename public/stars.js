@@ -1,84 +1,9 @@
 import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r122/build/three.module.js';
+import { OrbitControls } from 'https://threejsfundamentals.org/threejs/resources/threejs/r122/examples/jsm/controls/OrbitControls.js';
 
 const canvas = document.querySelector('#c');
 const renderer = new THREE.WebGLRenderer({ canvas });
-
-// const fov = 75;
-// const aspect = 2;  // the canvas default
-// const near = 0.1;
-// const far = 5;
-// const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-// camera.position.z = 2;
-
-// const scene = new THREE.Scene();
-
-// {
-//     const color = 0xFFFFFF;
-//     const intensity = 1;
-//     const light = new THREE.DirectionalLight(color, intensity);
-//     light.position.set(-1, 2, 4);
-//     scene.add(light);
-// }
-
-// const boxWidth = .75;
-// const boxHeight = .75;
-// const boxDepth = .75;
-// const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
-
-// function makeInstance(geometry, color, x) {
-//     const material = new THREE.MeshPhongMaterial({ color });
-
-//     const cube = new THREE.Mesh(geometry, material);
-//     scene.add(cube);
-
-//     cube.position.x = x;
-
-//     return cube;
-// }
-
-// const cubes = [
-//     makeInstance(geometry, 0x44aa88, 0),
-//     makeInstance(geometry, 0x8844aa, -2),
-//     makeInstance(geometry, 0xaa8844, 2),
-// ];
-
-// function resizeRendererToDisplaySize(renderer) {
-//     const canvas = renderer.domElement;
-//     const pixelRatio = window.devicePixelRatio;
-//     const width = canvas.clientWidth * pixelRatio | 0;
-//     const height = canvas.clientHeight * pixelRatio | 0;
-//     const needResize = canvas.width !== width || canvas.height !== height;
-//     if (needResize) {
-//         renderer.setSize(width, height, false);
-//     }
-//     return needResize;
-// }
-
-// function render(time) {
-//     time *= 0.001;
-
-//     if (resizeRendererToDisplaySize(renderer)) {
-//         const canvas = renderer.domElement;
-//         camera.aspect = canvas.clientWidth / canvas.clientHeight;
-//         camera.updateProjectionMatrix();
-//     }
-
-//     cubes.forEach((cube, ndx) => {
-//         const speed = 1 + ndx * .1;
-//         const rot = time * speed;
-//         cube.rotation.x = rot;
-//         cube.rotation.y = rot;
-//     });
-
-//     renderer.render(scene, camera);
-
-//     requestAnimationFrame(render);
-// }
-
-// requestAnimationFrame(render);
-
-// if i change anything about camera properties must call
-// camera.updateProjectionMatrix()
+let velocity = .01;
 
 window.addEventListener("load", init);
 
@@ -87,31 +12,47 @@ function init() {
     const scene = new THREE.Scene();
     scene.fog = new THREE.Fog(0xaaaaaa, 50, 2000);
 
-    const camera = new THREE.PerspectiveCamera(70, 1000);
+    const camera = new THREE.PerspectiveCamera(50, 1000);
     const geometry = new THREE.Geometry();
+
+    // const controls = new OrbitControls(camera, canvas);
+    // controls.enableDamping = true;
+    // controls.enablePan = false;
+    // controls.minDistance = 1.2;
+    // controls.maxDistance = 4;
+    // controls.update();
+
+    const sprite = new THREE.TextureLoader().load('disc.png');
 
     for (let i = 0; i < 10000; i++) {
         const star = new THREE.Vector3();
         star.x = THREE.Math.randFloatSpread(2000);
-        star.y = THREE.Math.randFloatSpread(2000);
+        star.y = THREE.Math.randFloatSpread(80);
         star.z = THREE.Math.randFloatSpread(2000);
 
         geometry.vertices.push(star)
     }
-
     const material = new THREE.PointsMaterial({
-        color: 0xffffff
+        color: 0xffffff,
+        size: 2,
+        map: sprite,
+        transparent: true, // make the material transparent
+        // alphaTest: 0.5,
+        blending: THREE.AdditiveBlending,
     });
+
     const starField = new THREE.Points(geometry, material);
     scene.add(starField);
 
+    // let renderRequested = false;
     function render() {
-        rot += 0.03;
+        rot += velocity;
         const radian = (rot * Math.PI) / 180;
         camera.position.x = 1000 * Math.sin(radian);
         camera.position.z = 1000 * Math.cos(radian);
-        camera.lookAt(new THREE.Vector3(0, 0, 0));
+        camera.lookAt(new THREE.Vector3(100, 0, 0));
 
+        // controls.update();
         renderer.render(scene, camera);
 
         requestAnimationFrame(render);
@@ -130,4 +71,13 @@ function init() {
         camera.updateProjectionMatrix();
     }
     onResize();
+
+    // function requestRenderIfNotRequested() {
+    //     if (!renderRequested) {
+    //         renderRequested = true;
+    //         requestAnimationFrame(render);
+    //     }
+    // }
+
+    // controls.addEventListener('change', requestRenderIfNotRequested);
 }

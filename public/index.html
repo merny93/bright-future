@@ -15,7 +15,7 @@
 	<script type="module" src="stars.js"></script>
 	<script src="hash.js"></script>
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Raleway&display=swap" rel="stylesheet">
 
 	<canvas id="c"></canvas>
 	<main>
@@ -23,18 +23,13 @@
 			Welcome
 		</div>
 		<div id='querry' class='landing'>
-			<form id='form'>
-				<label for="question">Ask your question to the stars</label><br>
-				<input type="text" id="question" name="question"><br>
-				<div type="submitQuestion" id="button" onclick="submitQuestion();">Submit</div>
-			</form>
-			<button type="submit" id="button">Submit</button>
+			<textarea id="questionarea"></textarea>
+			<button type="button" id="button" onclick="submitQuestion()">Submit</button>
 		</div>
 		<div id="loading">
 			Querrying the stars ... 
 		</div>
 		<div id="answer hidden">
-			<!-- GPT OUTPUT HERE -->
 		</div>
 		<div class='hidden'>
 			Info text about the STARS

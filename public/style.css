@@ -41,11 +41,13 @@ main {
 }
 
 #welcome {
-  border: 1px solid red;
   font-size: 3em;
 }
 
 #querry {
-  border: 1px solid blue;
   font-family: 'Dancing Script', cursive;
+}
+
+#questionarea {
+  font-family: 'Raleway';
 }
