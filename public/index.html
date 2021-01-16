@@ -12,6 +12,7 @@
 	<!-- <img src="http://lwalab.phys.unm.edu/lwatv2/lwatv.png?nocache=1610765785012" id="myimage" /> -->
 
 	<script src="script.js"></script>
+	<script src="styling.js"></script>
 	<script type="module" src="stars.js"></script>
 	<script src="hash.js"></script>
 	<link rel="preconnect" href="https://fonts.gstatic.com">
@@ -20,25 +21,26 @@
 
 	<canvas id="c"></canvas>
 	<main>
-		<div id='welcome' class='landing'>
-			Welcome 
+		<div id='welcome' class='landing hidden'>
+			<p>Welcome</p>
+			<p>Ask your question to the stars</p>
 			<!-- TODO fade out after 2-3 seconds -->
 		</div>
 		<div id='querry' class='landing'>
 			<!-- TODO fade in after welcome disappears -->
-			<p>Ask your question to the stars</p>
 			<p>
-				<!-- TODO cursor auto place + blinking -->
-				<textarea id="questionarea" placeholder="What should I eat for dinner?" onkeypress="onTestChange()"></textarea>
+				<textarea id="questionarea" rows="1" placeholder="What should I eat for dinner?"
+					onkeypress="onTestChange()"></textarea>
 				<button type="button" id="button" onclick="submitQuestion()">
 					<i class="fa fa-arrow-circle-right"></i>
 				</button>
 			</p>
 		</div>
-		<div id="loading">
+		<div id="loading" class="landing hidden">
 			Querrying the stars ... [appears when loading]
 		</div>
-		<div id="answer hidden">
+		<div id="answer" class="landing">
+			<!-- TODO MODEL ANSWER GETS POSTED HERE -->
 		</div>
 		<div class='hidden'>
 			Info text about the STARS

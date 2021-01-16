@@ -1,6 +1,5 @@
 var express = require('express');
 const bodyParser = require('body-parser');
-    // gpt3Worker = require('./gpt3.js').Request; // see  template
 
 var app = express();
 
@@ -10,7 +9,7 @@ app.use(bodyParser.json());
 
 
 const got = require('got');
-const prompt_template = `Q: Should I eat salad or popcorn?\nA: (A) salad (B) popcorn\nQ: When should I go to sleep?\nA:(A) now (B) in two hours (C) at midnight\nQ:`;
+const prompt_template = `Q: Should I eat salad or popcorn?\nA: (A) You should eat a salad (B) You should eat popcorn\nQ: When should I go to sleep?\nA:(A) You should go to sleep now (B) You should go to sleep in two hours (C) You should go to sleep at midnight\nQ:`;
 
 function formatAnswers(zeAnswers) {
     zeAnswers.shift();
@@ -32,7 +31,7 @@ function sendQuestion(prompt, callback) {
         const url = 'https://api.openai.com/v1/engines/davinci/completions';
         const params = {
             "prompt": full_prompt,
-            "max_tokens": 10,
+            "max_tokens": 30,
             "temperature": 0.3
         };
         const headers = {
@@ -55,7 +54,7 @@ function sendQuestion(prompt, callback) {
     })();
 }
 
-
+//route for the prediction
 app.post('/future', async(req,res) =>{
     // console.log(req.body.text)
     // res.send(req.body)

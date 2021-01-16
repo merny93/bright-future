@@ -17,7 +17,7 @@ canvas {
   height: 100vh;
   position: fixed;
   top: 0;
-  background:radial-gradient(circle farthest-corner at center top, #071021, #19324a);
+  background:radial-gradient(circle farthest-corner at center top, #060f1f, #16324d);
   z-index: -1;
 }
 
@@ -38,6 +38,9 @@ main {
 .landing {
   font-family: 'Dancing Script', cursive;
   font-size: 2em;
+  /* visibility: hidden; */
+  transition: opacity 3s;
+  opacity: 0;
 }
 
 #welcome {
@@ -60,16 +63,17 @@ main {
   border: none;
   border-bottom: 1px solid white;
   outline: none;
-  height: 1em;
+  /* line-height: 1em; */
   font-family: 'Raleway';
   font-size: .65em;
-
+  overflow-y: hidden;
   /* TODO AUTO RESIZE when text is over one line long*/
 }
 
 p {
-  margin-top: .5em;
-  margin-bottom: .5em;
+  margin-top: .25em;
+  margin-bottom: .25em;
+  text-align: center;
 }
 
 button {
@@ -82,11 +86,10 @@ button {
   border: none;
   cursor: pointer;
   font-size: large;
+  padding-bottom: 4px;
   /* TODO */
   /* STYLE + ADD FAVICON INSTEAD OF TEXT */
 }
 
 #loading {
-  font-family: 'Dancing Script', cursive;
-  font-size: 2em;
 }

@@ -1,10 +1,11 @@
 {
   "name": "bright-future",
   "version": "1.0.0",
-  "description": "",
+  "description": "to launch the server npm init --yes export OPENAI_SECRET_KEY='YOUR_API_KEY_HERE'",
   "main": "gpt3.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,6 @@
   "dependencies": {
     "express": "^4.17.1",
     "got": "^11.8.0"
-  }
+  },
+  "devDependencies": {}
 }
