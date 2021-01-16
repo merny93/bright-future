@@ -1,19 +1,30 @@
+importScripts('hash.js');
+
+
 let input = document.getElementById('question');
+
+
 
 function submitQuestion() {
     console.log("submitted")
-    var xhttp = new XMLHttpRequest();
+    let xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/future", true); 
     xhttp.setRequestHeader("Content-Type", "application/json");
     xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         // Response
-        var response = this.responseText;
+        let response = JSON.parse(this.responseText);
+        // console.log(response)
+        toDataURL(
+            'http://lwalab.phys.unm.edu/lwatv2/lwatv.png?nocache=1610765785012',
+            function(dataUrl) {
+                let starsChoice = dataUrl.hashCode()%(response.length)
+                console.log('RESULT:', response[starsChoice])
+            });
         //serve the shit here!
-        console.log(response)
     }
     };
-    var data = {text:'yogesh'};
+    let data = {text:'When shoud Raffi go to sleep?'};
     xhttp.send(JSON.stringify(data));
     // TODO WHATEVER NEEDS TO HAPPEN WHEN CLICKED 
 }
