@@ -46,8 +46,47 @@ main {
 
 #querry {
   font-family: 'Dancing Script', cursive;
+  width: min(35ch, 90vw);
+  text-align: center;
 }
 
 #questionarea {
   font-family: 'Raleway';
+  resize: none;
+  width: calc(100% - 35px); 
+  background-color: transparent;
+  color: white;
+  caret-color: white;
+  border: none;
+  border-bottom: 1px solid white;
+  outline: none;
+  height: 1em;
+  font-family: 'Raleway';
+  font-size: .65em;
+
+  /* TODO AUTO RESIZE when text is over one line long*/
+}
+
+p {
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+
+button {
+  font-family: 'Raleway';
+  width: 20px;
+  margin: 0;
+  padding: 2px;
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: large;
+  /* TODO */
+  /* STYLE + ADD FAVICON INSTEAD OF TEXT */
+}
+
+#loading {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2em;
 }

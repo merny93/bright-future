@@ -1,7 +1,7 @@
 importScripts('hash.js');
 
 
-let input = document.getElementById('question');
+let input = document.getElementById('questionarea');
 
 
 
@@ -26,18 +26,18 @@ function submitQuestion() {
     };
     let data = {text:'When shoud Raffi go to sleep?'};
     xhttp.send(JSON.stringify(data));
-    // TODO WHATEVER NEEDS TO HAPPEN WHEN CLICKED 
+
+    document.getElementById("questionarea").value = "";
 }
 
-// // Execute a function when the user releases a key on the keyboard
-// input.addEventListener("keyup", function (event) {
-//     // Number 13 is the "Enter" key on the keyboard
-//     if (event.keyCode === 13) {
-//         // Cancel the default action, if needed
-//         event.preventDefault();
-//         // Trigger the button element with a click
-//         document.getElementById("button").click();
-//     }
-// }); 
+
+function onTestChange() {
+    var key = window.event.keyCode;
+    // If the user has pressed enter
+    if (key === 13) {
+        event.preventDefault();
+        document.getElementById("button").click();
+    }
+}
 
 

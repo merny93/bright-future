@@ -3,7 +3,7 @@ import { OrbitControls } from 'https://threejsfundamentals.org/threejs/resources
 
 const canvas = document.querySelector('#c');
 const renderer = new THREE.WebGLRenderer({ canvas });
-let velocity = .01;
+let velocity = .005;
 
 window.addEventListener("load", init);
 
