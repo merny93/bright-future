@@ -23,6 +23,7 @@ canvas {
 
 .hidden {
   height: 0px; 
+  z-index: -100;
 }
 
 .done{
@@ -106,17 +107,60 @@ button {
   font-family: 'Dancing Script', cursive;
   text-decoration: underline;
   font-size: 1em;
-  -webkit-transition-duration: 700ms;
+  /* -webkit-transition-duration: 700ms;
   -o-transition-duration: 700ms;
   -moz-transition-duration: 700ms;
-  transition-duration: 700ms;
+  transition-duration: 700ms; */
 }
 
 #askagain:hover {
   color: gray;
+  opacity: 1;
 }
 
 .moreinfo {
   padding-top: 1em;
   text-align: center;
+}
+
+
+#firstPage {
+  position: relative;
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;  
+  min-height: 100%;
+  width: 100%;
+  scroll-snap-align: start;
+}
+
+#secondPage{
+  position: relative;
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;  
+  min-height: 100%;
+  width: 100%;
+  scroll-snap-align: start;
+}
+
+#scrollable {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+#scrollable::-webkit-scrollbar {
+  display: none;
+}
+
+#info {
+  font-family: 'Dancing Script', cursive;
+  position: absolute;
+  bottom: 50px;
 }

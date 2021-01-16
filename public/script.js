@@ -1,4 +1,4 @@
-
+let fast = false;
 //BIG boi function that sends request to backend 
 // gets choices back and chooses them based on the imgae hash
 function submitQuestion() {
@@ -52,6 +52,8 @@ function submitQuestion() {
     // input.value = "";
     //fade out the questions. rest is in the styling.js
     document.getElementById("querry").style.opacity = '0';
+    //set fast to true 
+    fast = true;
 
     // TODO 
     // whatever CSS class switching (fade out/in stuff) needs to happen

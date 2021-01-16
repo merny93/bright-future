@@ -2,8 +2,11 @@ import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threej
 import { OrbitControls } from 'https://threejsfundamentals.org/threejs/resources/threejs/r122/examples/jsm/controls/OrbitControls.js';
 
 const canvas = document.querySelector('#c');
+const scrollable = document.querySelector('#scrollable');
 const renderer = new THREE.WebGLRenderer({ canvas });
-let velocity = .005;
+const targetVelocity = .005;
+let velocity = targetVelocity;
+
 
 window.addEventListener("load", init);
 
@@ -20,7 +23,7 @@ function init() {
     const scene = new THREE.Scene();
     scene.fog = new THREE.Fog(0xaaaaaa, 50, 2000);
 
-    const camera = new THREE.PerspectiveCamera(50, 1000);
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 1, 5000);
     const geometry = new THREE.Geometry();
 
     // const controls = new OrbitControls(camera, canvas);
@@ -51,35 +54,34 @@ function init() {
         blending: THREE.AdditiveBlending,
     });
 
+    const constellations = [];
+    for (let i = 0; i < 80; i++) {
+        const star = new THREE.Vector3(); 
+        let theta = THREE.Math.randFloat(0, 2*Math.PI);
+        let zval = THREE.Math.randFloat(750, 850);
+        star.x = Math.cos(theta) * zval;
+        star.y = randn_bm() * 40; 
+        star.z = Math.sin(theta) * zval;
+        let neighbours = [star];
+        for (let j = 0; j < 6; j++) {
+            const neighbour = new THREE.Vector3(); 
+            neighbour.x = star.x + THREE.Math.randFloatSpread(40);
+            neighbour.y = star.y + THREE.Math.randFloatSpread(40);
+            neighbour.z = star.z + THREE.Math.randFloatSpread(30);
+            neighbours.push(neighbour);
+        }
+        constellations.push(neighbours);
+    }
+
+    constellations.forEach(( pointList ) => {
+        constellations.forEach(( point ) => {
+            geometry.vertices.push(point);
+            console.log('hi?')
+        });
+    });
+    
     const starField = new THREE.Points(geometry, material);
     scene.add(starField);
-
-    // const linedpoints = []; 
-    // let closePoints = geometry.vertices.filter(function (point) {
-    //     return (point.z <= 850 && point.z >= 750)
-    // });
-    // console.log(closePoints.length);
-    
-    const constellations = []; 
-    // let activePoints = closePoints;
-    // while (activePoints.length != 0) {
-    //     let point = activePoints[0];
-    //     let pointList = [point]; 
-    //     let removedIndices = [0];
-    //     activePoints.forEach( (secondPoint, index) => {
-    //         // ADD INDICES TO START 
-    //         let dist = point.distanceTo(secondPoint); 
-    //         if (dist <= 30) {
-    //             pointList.push(secondPoint);
-    //             removedIndices.unshift(index); 
-    //         }
-    //     });
-    //     removedIndices.forEach( (i) => {
-    //         activePoints.splice(0,i) // remove point
-    //     });
-    //     // activePoints.splice(0,1); // remove point
-    //     constellations.push(pointList);
-    // }
 
     const linematerial = new THREE.LineBasicMaterial({
         color: 0xffffff,
@@ -89,22 +91,26 @@ function init() {
         // make this more transparent ?
     });
 
-    // constellations.forEach((constellation) => { 
-    //     const linegeometry = new THREE.BufferGeometry().setFromPoints(constellation);
-    //     const lines = new THREE.Line(linegeometry, linematerial);
-    //     scene.add(lines);            
-    // });
-
-    const linegeometry = new THREE.BufferGeometry().setFromPoints(closePoints);
-    const lines = new THREE.Line(linegeometry, linematerial);
-    // scene.add(lines);
+    constellations.forEach((constellation) => { 
+        const linegeometry = new THREE.BufferGeometry().setFromPoints(constellation);
+        const lines = new THREE.Line(linegeometry, linematerial);
+        scene.add(lines);    
+    });
 
     // let renderRequested = false;
     function render() {
+        const factor = 50;
+        const v2 = factor * targetVelocity;
+        const v1 = targetVelocity;
+        const speed = 1;
+        const dtheta = speed * (v2 - velocity) * (velocity - v1);
+        velocity = velocity + (fast ? dtheta : -dtheta);
         rot += velocity;
         const radian = (rot * Math.PI) / 180;
         camera.position.x = 1000 * Math.sin(radian);
         camera.position.z = 1000 * Math.cos(radian);
+        const dy = (camera.position.y - (-scrollable.scrollTop));
+        camera.position.y = -scrollable.scrollTop + 0.99*dy;
         camera.lookAt(new THREE.Vector3(100, 0, 0));
 
         // controls.update();

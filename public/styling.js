@@ -66,7 +66,27 @@ window.addEventListener('load', function () {
         }
         
     });
+    resultStars.addEventListener('transitionend', function() {
+        console.log("hi")
+        if (resultStars.style.opacity == "1"){
+            //faded in
+            fast = false;
+        } else {
+            //fadded out
+            resultStars.classList.add('hidden');
+            document.getElementById("answerholder").innerHTML = "";
+            querryArea.classList.remove('hidden');
+            querryArea.style.opacity = '1';
+        }
+    });
 }, false);
+
+
+function resetQuestion(){
+    //fadeout answer box
+    document.getElementById("answer").style.opacity = "0";
+    document.getElementById("questionarea").value = "";
+}
 
 
 // focus on the text area when page is entered
