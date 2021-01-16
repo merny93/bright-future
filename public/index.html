@@ -11,23 +11,29 @@
 <body>
 	<!-- <img src="http://lwalab.phys.unm.edu/lwatv2/lwatv.png?nocache=1610765785012" id="myimage" /> -->
 
-	<script src="script.js">
-	</script>
+	<script src="script.js"></script>
 	<script type="module" src="stars.js"></script>
-	<script src="hash.js">
-	</script>
-	<!-- <h1> Tester </h1> -->
+	<script src="hash.js"></script>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
 	<canvas id="c"></canvas>
 	<main>
-		<div id='welcome'>
+		<div id='welcome' class='landing'>
 			Welcome
 		</div>
-		<div id='querry'>
+		<div id='querry' class='landing'>
 			<form>
 				<label for="question">Ask your question to the stars</label><br>
 				<input type="text" id="question" name="question"><br>
-				<button type="submit" id="button">Submit</button>
+				<button type="submit" id="button" onclick="return submit();">Submit</button>
 			</form>
+		</div>
+		<div id="loading">
+			Querrying the stars ... 
+		</div>
+		<div id="answer hidden">
+			<!-- GPT OUTPUT HERE -->
 		</div>
 		<div class='hidden'>
 			Info text about the STARS
