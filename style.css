@@ -11,6 +11,17 @@ canvas {
   margin: 0;
   width: 100vw;
   height: 100vh;
-  /* position: fixed; */
-  /* top: 0; */
+  position: fixed;
+  top: 0;
+  background:radial-gradient(circle farthest-corner at center top, #071021, #19324a);
+  z-index: -1;
+}
+
+.hidden {
+    display: none; 
+}
+
+#welcome {
+    color: white;
+    background: gray;
 }
