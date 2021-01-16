@@ -32,9 +32,9 @@ function toDataURL(src, callback, outputFormat) {
   }
 }
 
-toDataURL(
-  'http://lwalab.phys.unm.edu/lwatv2/lwatv.png?nocache=1610765785012',
-  function(dataUrl) {
-    console.log('RESULT:', dataUrl.hashCode())
-  }
-)
+// toDataURL(
+//   'http://lwalab.phys.unm.edu/lwatv2/lwatv.png?nocache=1610765785012',
+//   function(dataUrl) {
+//     console.log('RESULT:', dataUrl.hashCode())
+//   }
+// )

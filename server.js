@@ -47,7 +47,7 @@ function sendQuestion(prompt, callback) {
             let answers = output.split(/\([A-Z]\)/);
 
             //   console.log(output);
-            callback.send(formatAnswers(answers));
+            callback.send(JSON.stringify(formatAnswers(answers)));
         } catch (err) {
             //   console.log(err);
             callback.send(output)
