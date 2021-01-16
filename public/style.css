@@ -25,6 +25,10 @@ canvas {
   display: none; 
 }
 
+.done{
+  display: none;
+}
+
 main {
   color: white;
   /* background: gray; */
@@ -39,7 +43,7 @@ main {
   font-family: 'Dancing Script', cursive;
   font-size: 2em;
   /* visibility: hidden; */
-  transition: opacity 3s;
+  transition: opacity 1.5s;
   opacity: 0;
 }
 
@@ -80,13 +84,13 @@ button {
   font-family: 'Raleway';
   width: 20px;
   margin: 0;
-  padding: 2px;
   background-color: transparent;
   color: white;
   border: none;
   cursor: pointer;
   font-size: large;
-  padding-bottom: 4px;
+  padding-top: 4px;
+  padding-bottom: 0px;
   /* TODO */
   /* STYLE + ADD FAVICON INSTEAD OF TEXT */
 }

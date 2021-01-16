@@ -7,6 +7,14 @@ let velocity = .005;
 
 window.addEventListener("load", init);
 
+// Standard Normal variate using Box-Muller transform.
+function randn_bm() {
+    var u = 0, v = 0;
+    while (u === 0) u = Math.random(); //Converting [0,1) to (0,1)
+    while (v === 0) v = Math.random();
+    return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+}
+
 function init() {
     let rot = 0;
     const scene = new THREE.Scene();
@@ -26,23 +34,35 @@ function init() {
 
     for (let i = 0; i < 10000; i++) {
         const star = new THREE.Vector3();
-        star.x = THREE.Math.randFloatSpread(2000);
-        star.y = THREE.Math.randFloatSpread(80);
-        star.z = THREE.Math.randFloatSpread(2000);
-
+        // let randx = THREE.Math.randFloatSpread(2000)
+        star.x = randn_bm() * 300;
+        // star.y = THREE.Math.randFloatSpread(80);
+        star.y = randn_bm() * 40;
+        star.z = randn_bm() * 330;
         geometry.vertices.push(star)
     }
     const material = new THREE.PointsMaterial({
         color: 0xffffff,
-        size: 2,
+        size: 3,
         map: sprite,
         transparent: true, // make the material transparent
         // alphaTest: 0.5,
         blending: THREE.AdditiveBlending,
     });
 
+    const linedpoints = []; 
+    // for
+
+    const linematerial = new THREE.LineBasicMaterial({
+        color: 0xffffff,
+    });
+
+    const linegeometry = new THREE.BufferGeometry().setFromPoints( geometry.vertices );
+    const lines = new THREE.Line( linegeometry, linematerial );
+
     const starField = new THREE.Points(geometry, material);
     scene.add(starField);
+    // scene.add(lines);
 
     // let renderRequested = false;
     function render() {

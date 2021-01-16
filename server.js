@@ -58,6 +58,7 @@ function sendQuestion(prompt, callback) {
 app.post('/future', async(req,res) =>{
     // console.log(req.body.text)
     // res.send(req.body)
+    // res.send(JSON.stringify(["hellop", "no"]));
     sendQuestion(req.body.text, res);
 });
 

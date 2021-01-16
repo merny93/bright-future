@@ -1,13 +1,18 @@
 //in order of what happens
 //fade in the splash 
 
+const openingWait = 1000; //wait one second before fade in
+const splashLength = 3000; // length of splash message
+
+
 //fades
 //its in the on load cause or else the html doesnt load in time
 window.addEventListener('load', function () {
     //get the things to fade and shite
     let splash = document.getElementById("welcome");
     let querryArea = document.getElementById("querry");
-    console.log(splash)
+    let waitStars = document.getElementById('loading');
+    let resultStars = document.getElementById('answer')
     //unhide the thing but make sure we cant actually see it
     splash.classList.remove('hidden');
     splash.style.opacity = '0';
@@ -15,12 +20,10 @@ window.addEventListener('load', function () {
     //now fade it in after 2 second
     setTimeout(function(){
         splash.style.opacity = '1';
-        console.log(splash)
-    }, 2000);
+    }, openingWait);
 
     //nowfor when its done loading in
     splash.addEventListener('transitionend', function () {
-        console.log("wopty");
         //check if its fade in or fade out
         if (splash.style.opacity == '0'){
             //its time to fade in the text input thing
@@ -28,10 +31,37 @@ window.addEventListener('load', function () {
             querryArea.classList.remove('hidden');
             querryArea.style.opacity = '1';
         } else {
-            //fade me out in 5 seconds
+            //wait and then fade out
             setTimeout(function() {
                 splash.style.opacity = '0'
-            }, 5000);
+            }, splashLength);
+        }
+    });
+    //for when a question was sent to the server!
+    querryArea.addEventListener('transitionend', function (){
+        if (querryArea.style.opacity == '0'){
+            console.log("i triggered");
+            //this means that the input was faded out
+            querryArea.classList.add('hidden');
+            //now fade in the waiting thing
+            waitStars.classList.remove('hidden');
+            waitStars.style.opacity = '1';
+        }
+    });
+    waitStars.addEventListener('transitionend', function(){
+        if (resultStars.classList.contains('done')){
+            //fade right back out
+            console.log("need to remove loading");
+            waitStars.style.opacity = '0';
+            resultStars.classList.remove('done');
+            resultStars.classList.add("hidden");
+        } else if (waitStars.style.opacity == '0'){
+            //it has been faded out
+            console.log("hid weight")
+            waitStars.classList.add('hidden');
+            //fade in the answer
+            resultStars.classList.remove('hidden');
+            resultStars.style.opacity = '1';
         }
     });
 }, false);

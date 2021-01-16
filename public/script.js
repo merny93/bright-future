@@ -19,6 +19,16 @@ function submitQuestion() {
                     let finalResponse = response[starsChoice]
                     console.log('RESULT:', finalResponse);
                     document.getElementById("answer").innerHTML = finalResponse;
+                    //fade out its gonne handle the rest
+                    if (document.getElementById("loading").style.opacity == "1"){
+                        //the loading screen loaded in so we unload it
+                        console.log("fully loaded screen");
+                        document.getElementById("loading").style.opacity = '0';
+                    } else {
+                        console.log('partial screen');
+                        document.getElementById('answer').classList.add('done');
+                    }
+                    
                     //THIS IS WHERE THE OUTPUT IS
                     //curently logging to console
                 });
@@ -37,7 +47,9 @@ function submitQuestion() {
     //send it out
     xhttp.send(JSON.stringify(data));
     console.log("submitted");
-    input.value = "";
+    // input.value = "";
+    //fade out the questions. rest is in the styling.js
+    document.getElementById("querry").style.opacity = '0';
 
     // TODO 
     // whatever CSS class switching (fade out/in stuff) needs to happen
