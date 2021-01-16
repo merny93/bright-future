@@ -1,14 +1,22 @@
 {
-  "name": "threeTest",
+  "name": "bright-future",
   "version": "1.0.0",
   "description": "",
-  "main": "hash.js",
+  "main": "gpt3.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/merny93/bright-future.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/merny93/bright-future/issues"
+  },
+  "homepage": "https://github.com/merny93/bright-future#readme",
   "dependencies": {
     "got": "^11.8.0"
   }
