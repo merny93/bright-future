@@ -50,19 +50,31 @@ function init() {
         blending: THREE.AdditiveBlending,
     });
 
+    const starField = new THREE.Points(geometry, material);
+    scene.add(starField);
+
     const linedpoints = []; 
-    // for
+    let closePoints = geometry.vertices.filter(function (point) {
+        return (point.z <= 850 && point.z >= 720 )
+    });
+    console.log(closePoints.length);
+    
+    const constellations = []; 
 
     const linematerial = new THREE.LineBasicMaterial({
         color: 0xffffff,
+        // make this more transparent ?
     });
 
-    const linegeometry = new THREE.BufferGeometry().setFromPoints( geometry.vertices );
-    const lines = new THREE.Line( linegeometry, linematerial );
+    // constellations.forEach((constellation) => { 
+    //     const linegeometry = new THREE.BufferGeometry().setFromPoints(constellation);
+    //     const lines = new THREE.Line(linegeometry, linematerial);
+    //     scene.add(lines);            
+    // });
 
-    const starField = new THREE.Points(geometry, material);
-    scene.add(starField);
-    // scene.add(lines);
+    const linegeometry = new THREE.BufferGeometry().setFromPoints(closePoints);
+    const lines = new THREE.Line(linegeometry, linematerial);
+    scene.add(lines);
 
     // let renderRequested = false;
     function render() {

@@ -49,20 +49,35 @@ window.addEventListener('load', function () {
         }
     });
     waitStars.addEventListener('transitionend', function(){
-        if (resultStars.classList.contains('done')){
-            //fade right back out
-            console.log("need to remove loading");
-            waitStars.style.opacity = '0';
-            resultStars.classList.remove('done');
-            resultStars.classList.add("hidden");
-        } else if (waitStars.style.opacity == '0'){
+        console.log("wwwwwwww");
+        if ((resultStars.classList.contains('done')) && (waitStars.style.opacity == '0')){
             //it has been faded out
             console.log("hid weight")
             waitStars.classList.add('hidden');
             //fade in the answer
             resultStars.classList.remove('hidden');
-            resultStars.style.opacity = '1';
+            resultStars.classList.remove('done');
+            resultStars.style.opacity = '0';
+            setTimeout(function(){
+                resultStars.style.opacity = '1';
+            }, 100);
+        }else if (resultStars.classList.contains('done')){
+            //fade right back out
+            console.log("need to remove loading");
+            waitStars.style.opacity = '0';
+            resultStars.classList.remove('done');
+            resultStars.classList.add("hidden");
+        }else if (waitStars.style.opacity == '0'){
+            waitStars.classList.add('hidden');
+            //fade in the answer
+            resultStars.classList.remove('hidden');
+            resultStars.classList.remove('done');
+            resultStars.style.opacity = '0';
+            setTimeout(function(){
+                resultStars.style.opacity = '1';
+            }, 100);
         }
+        
     });
 }, false);
 

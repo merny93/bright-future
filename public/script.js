@@ -15,14 +15,16 @@ function submitQuestion() {
             toDataURL(
                 'http://lwalab.phys.unm.edu/lwatv2/lwatv.png?nocache=1610765785012',
                 function (dataUrl) {
-                    let starsChoice = dataUrl.hashCode() % (response.length);
+                    let starsChoice = Math.abs(dataUrl.hashCode() % (response.length));
                     let finalResponse = response[starsChoice]
-                    console.log('RESULT:', finalResponse);
+                    console.log('RESULT:', starsChoice);
+                    console.log(response)
                     document.getElementById("answer").innerHTML = finalResponse;
                     //fade out its gonne handle the rest
                     if (document.getElementById("loading").style.opacity == "1"){
                         //the loading screen loaded in so we unload it
                         console.log("fully loaded screen");
+                        document.getElementById("answer").classList.add('done');
                         document.getElementById("loading").style.opacity = '0';
                     } else {
                         console.log('partial screen');
