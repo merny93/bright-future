@@ -13,7 +13,7 @@ function submitQuestion() {
         console.log(response)
     }
     };
-    var data = {text:'yogesh'};
+    var data = {text:'Do I look better in green or pink'};
     xhttp.send(JSON.stringify(data));
     // TODO WHATEVER NEEDS TO HAPPEN WHEN CLICKED 
 }
