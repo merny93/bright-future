@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/merny93/bright-future#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "got": "^11.8.0"
   }
 }
