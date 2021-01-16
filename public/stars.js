@@ -54,32 +54,32 @@ function init() {
     const starField = new THREE.Points(geometry, material);
     scene.add(starField);
 
-    const linedpoints = []; 
-    let closePoints = geometry.vertices.filter(function (point) {
-        return (point.z <= 850 && point.z >= 725)
-    });
-    console.log(closePoints.length);
+    // const linedpoints = []; 
+    // let closePoints = geometry.vertices.filter(function (point) {
+    //     return (point.z <= 850 && point.z >= 750)
+    // });
+    // console.log(closePoints.length);
     
     const constellations = []; 
-    let activePoints = closePoints;
-    while (activePoints.length != 0) {
-        point = activePoints[0];
-        pointList = [point]; 
-        removedIndices = [0];
-        activePoints.forEach( (secondPoint, index) => {
-            // ADD INDICES TO START 
-            let dist = point.distanceTo(secondPoint); 
-            if (dist <= 30) {
-                pointList.push(secondPoint);
-                removedIndices.unshift(index); 
-            }
-        });
-        removedIndices.forEach( (i) => {
-            activePoints.splice(0,i) // remove point
-        });
-        // activePoints.splice(0,1); // remove point
-        constellations.push(pointList);
-    }
+    // let activePoints = closePoints;
+    // while (activePoints.length != 0) {
+    //     let point = activePoints[0];
+    //     let pointList = [point]; 
+    //     let removedIndices = [0];
+    //     activePoints.forEach( (secondPoint, index) => {
+    //         // ADD INDICES TO START 
+    //         let dist = point.distanceTo(secondPoint); 
+    //         if (dist <= 30) {
+    //             pointList.push(secondPoint);
+    //             removedIndices.unshift(index); 
+    //         }
+    //     });
+    //     removedIndices.forEach( (i) => {
+    //         activePoints.splice(0,i) // remove point
+    //     });
+    //     // activePoints.splice(0,1); // remove point
+    //     constellations.push(pointList);
+    // }
 
     const linematerial = new THREE.LineBasicMaterial({
         color: 0xffffff,
@@ -97,7 +97,7 @@ function init() {
 
     const linegeometry = new THREE.BufferGeometry().setFromPoints(closePoints);
     const lines = new THREE.Line(linegeometry, linematerial);
-    scene.add(lines);
+    // scene.add(lines);
 
     // let renderRequested = false;
     function render() {
