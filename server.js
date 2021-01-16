@@ -1,17 +1,12 @@
 var express = require('express');
+const bodyParser = require('body-parser');
     // gpt3Worker = require('./gpt3.js').Request; // see  template
 
 var app = express();
 
 app.use(express.static(__dirname + '/public')); // exposes index.html, per below
-
-// app.get('/request', function(req, res){
-//     // run your request.js script
-//     // when index.html makes the ajax call to www.yoursite.com/request, this runs
-//     // you can also require your request.js as a module (above) and call on that:
-//     res.send(list.getList()); // try res.json() if getList() returns an object or array
-// });
-
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 
 const got = require('got');
@@ -45,7 +40,9 @@ sendQuestion = function(prompt){
 
 
 app.post('/future', function(req,res){
-    res.send(sendQuestion(req));
+    console.log(req.body)
+    res.send(req.body)
+    res.send(sendQuestion(req.body.text));
 });
 
 app.listen(3000)

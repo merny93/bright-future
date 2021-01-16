@@ -13,7 +13,7 @@ function submitQuestion() {
         console.log(response)
     }
     };
-    var data = {name:'yogesh',salary: 35000,email: 'yogesh@makitweb.com'};
+    var data = {text:'yogesh'};
     xhttp.send(JSON.stringify(data));
     // TODO WHATEVER NEEDS TO HAPPEN WHEN CLICKED 
 }
