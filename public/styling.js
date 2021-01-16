@@ -1,8 +1,8 @@
 //in order of what happens
 //fade in the splash 
 
-const openingWait = 1000; //wait one second before fade in
-const splashLength = 3000; // length of splash message
+const openingWait = 10; //wait one second before fade in
+const splashLength = 30; // length of splash message
 
 
 //fades
@@ -49,33 +49,20 @@ window.addEventListener('load', function () {
         }
     });
     waitStars.addEventListener('transitionend', function(){
-        console.log("wwwwwwww");
-        if ((resultStars.classList.contains('done')) && (waitStars.style.opacity == '0')){
-            //it has been faded out
-            console.log("hid weight")
+        if (waitStars.style.opacity == "1"){
+            if (document.getElementById("answerholder").innerHTML != ""){
+                //answer already there when it loads
+                //fade out
+                waitStars.style.opacity = '0';
+            } else {
+                //let the other function know that it has to unload it
+                waitStars.classList.add('ready');
+            }
+        } else {
+            //it was faded out so load in the answer
             waitStars.classList.add('hidden');
-            //fade in the answer
             resultStars.classList.remove('hidden');
-            resultStars.classList.remove('done');
-            resultStars.style.opacity = '0';
-            setTimeout(function(){
-                resultStars.style.opacity = '1';
-            }, 100);
-        }else if (resultStars.classList.contains('done')){
-            //fade right back out
-            console.log("need to remove loading");
-            waitStars.style.opacity = '0';
-            resultStars.classList.remove('done');
-            resultStars.classList.add("hidden");
-        }else if (waitStars.style.opacity == '0'){
-            waitStars.classList.add('hidden');
-            //fade in the answer
-            resultStars.classList.remove('hidden');
-            resultStars.classList.remove('done');
-            resultStars.style.opacity = '0';
-            setTimeout(function(){
-                resultStars.style.opacity = '1';
-            }, 100);
+            resultStars.style.opacity = '1';
         }
         
     });

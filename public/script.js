@@ -19,16 +19,16 @@ function submitQuestion() {
                     let finalResponse = response[starsChoice]
                     console.log('RESULT:', starsChoice);
                     console.log(response)
-                    document.getElementById("answer").innerHTML = finalResponse;
+                    document.getElementById("answerholder").innerHTML = finalResponse;
                     //fade out its gonne handle the rest
-                    if (document.getElementById("loading").style.opacity == "1"){
+                    if (document.getElementById("loading").classList.contains('ready')){
                         //the loading screen loaded in so we unload it
                         console.log("fully loaded screen");
-                        document.getElementById("answer").classList.add('done');
                         document.getElementById("loading").style.opacity = '0';
+                        document.getElementById("loading").classList.remove('ready');
                     } else {
+                        // we set the html already so the other function will handle
                         console.log('partial screen');
-                        document.getElementById('answer').classList.add('done');
                     }
                     
                     //THIS IS WHERE THE OUTPUT IS
@@ -63,7 +63,7 @@ function onTestChange() {
     // If the user has pressed enter
     if (key === 13) {
         event.preventDefault();
-        document.getElementById("button").click();
+        document.getElementById("enter").click();
     }
 }
 

@@ -22,7 +22,7 @@ canvas {
 }
 
 .hidden {
-  display: none; 
+  height: 0px; 
 }
 
 .done{
@@ -43,7 +43,7 @@ main {
   font-family: 'Dancing Script', cursive;
   font-size: 2em;
   /* visibility: hidden; */
-  transition: opacity 1.5s;
+  transition: opacity 1s;
   opacity: 0;
 }
 
@@ -80,20 +80,43 @@ p {
   text-align: center;
 }
 
+#answerholder {
+  text-align: center;
+}
+
 button {
-  font-family: 'Raleway';
-  width: 20px;
   margin: 0;
   background-color: transparent;
   color: white;
   border: none;
   cursor: pointer;
   font-size: large;
+}
+
+#enter {
+  font-family: 'Raleway';
+  width: 20px;
   padding-top: 4px;
   padding-bottom: 0px;
   /* TODO */
   /* STYLE + ADD FAVICON INSTEAD OF TEXT */
 }
 
-#loading {
+#askagain {
+  font-family: 'Dancing Script', cursive;
+  text-decoration: underline;
+  font-size: 1em;
+  -webkit-transition-duration: 700ms;
+  -o-transition-duration: 700ms;
+  -moz-transition-duration: 700ms;
+  transition-duration: 700ms;
+}
+
+#askagain:hover {
+  color: gray;
+}
+
+.moreinfo {
+  padding-top: 1em;
+  text-align: center;
 }

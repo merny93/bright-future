@@ -58,9 +58,9 @@ function sendQuestion(prompt, callback) {
 app.post('/future', async(req,res) =>{
     // console.log(req.body.text)
     // res.send(req.body)
-    setTimeout(() => {  res.send(JSON.stringify(["hellop", "no"])); }, 2000);
+    // setTimeout(() => {  res.send(JSON.stringify(["hellop", "no"])); }, 5000);
     // res.send(JSON.stringify(["hellop", "no"]));
-    // sendQuestion(req.body.text, res);
+    sendQuestion(req.body.text, res);
 });
 
 app.listen(3000)
