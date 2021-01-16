@@ -1,6 +1,20 @@
 let input = document.getElementById('question');
 
-function submit() {
+function submitQuestion() {
+    console.log("submitted")
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/future", true); 
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        // Response
+        var response = this.responseText;
+        //serve the shit here!
+        console.log(response)
+    }
+    };
+    var data = {name:'yogesh',salary: 35000,email: 'yogesh@makitweb.com'};
+    xhttp.send(JSON.stringify(data));
     // TODO WHATEVER NEEDS TO HAPPEN WHEN CLICKED 
 }
 
@@ -14,3 +28,5 @@ function submit() {
 //         document.getElementById("button").click();
 //     }
 // }); 
+
+
