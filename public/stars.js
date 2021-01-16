@@ -3,9 +3,11 @@ import { OrbitControls } from 'https://threejsfundamentals.org/threejs/resources
 
 const canvas = document.querySelector('#c');
 const scrollable = document.querySelector('#scrollable');
-const renderer = new THREE.WebGLRenderer({ canvas });
-const targetVelocity = .005;
-let velocity = targetVelocity;
+const renderer = new THREE.WebGLRenderer({ 
+    canvas,
+    alpha: true, // lets CSS background through
+});
+
 
 
 window.addEventListener("load", init);
@@ -74,9 +76,8 @@ function init() {
     }
 
     constellations.forEach(( pointList ) => {
-        constellations.forEach(( point ) => {
+        pointList.forEach(( point ) => {
             geometry.vertices.push(point);
-            console.log('hi?')
         });
     });
     
@@ -99,13 +100,8 @@ function init() {
 
     // let renderRequested = false;
     function render() {
-        const factor = 50;
-        const v2 = factor * targetVelocity;
-        const v1 = targetVelocity;
-        const speed = 1;
-        const dtheta = speed * (v2 - velocity) * (velocity - v1);
-        velocity = velocity + (fast ? dtheta : -dtheta);
-        rot += velocity;
+        TWEEN.update()
+        rot += velocity.v;
         const radian = (rot * Math.PI) / 180;
         camera.position.x = 1000 * Math.sin(radian);
         camera.position.z = 1000 * Math.cos(radian);

@@ -70,7 +70,7 @@ window.addEventListener('load', function () {
         console.log("hi")
         if (resultStars.style.opacity == "1"){
             //faded in
-            fast = false;
+            endSpeedup();
         } else {
             //fadded out
             resultStars.classList.add('hidden');

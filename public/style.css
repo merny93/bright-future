@@ -17,7 +17,8 @@ canvas {
   height: 100vh;
   position: fixed;
   top: 0;
-  background:radial-gradient(circle farthest-corner at center top, #060f1f, #16324d);
+  /* background-color: green; */
+  background:radial-gradient(circle farthest-corner at center top, #000000, #021424);
   z-index: -1;
 }
 
@@ -74,6 +75,22 @@ main {
   overflow-y: hidden;
   /* TODO AUTO RESIZE when text is over one line long*/
 }
+
+textarea::-webkit-input-placeholder {
+  color: rgb(226, 226, 226);
+}
+
+textarea:-moz-placeholder { /* Firefox 18- */
+  color: rgb(226, 226, 226);  
+}
+
+textarea::-moz-placeholder {  /* Firefox 19+ */
+  color: rgb(226, 226, 226);  
+}
+
+textarea:-ms-input-placeholder {
+  color: rgb(226, 226, 226);  
+}  
 
 p {
   margin-top: .25em;
@@ -161,6 +178,38 @@ button {
 
 #info {
   font-family: 'Dancing Script', cursive;
+  font-size: 1.3em;
   position: absolute;
-  bottom: 50px;
+  bottom: 40px;
+  cursor: pointer;
+}
+
+/* SECOND PAGE  */
+
+#upArrow {
+  font-family: 'Dancing Script', cursive;
+  font-size: large;
+  position: absolute;
+  top: 0px;
+  padding: 40px 50px 50px 50px;
+  cursor: pointer;
+}
+
+#secondPage {
+  font-family: 'Raleway';
+  padding-left: ;
+}
+
+a {
+  text-decoration: none;
+  color: #bee1ff;
+  -webkit-transition-duration: 300ms;
+  -o-transition-duration: 300ms;
+  -moz-transition-duration: 300ms;
+  transition-duration: 300ms;
+}
+
+a:hover {
+  color: #88bbe7;
+  text-decoration-thickness: thin;
 }

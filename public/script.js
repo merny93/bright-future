@@ -1,4 +1,21 @@
-let fast = false;
+const targetVelocity = .005;
+const factor = 50;
+let velocity = {v : targetVelocity};
+let speedTween;
+let slowTween;
+
+speedTween = new TWEEN.Tween(velocity).to({v : factor * targetVelocity}, 2000).easing(TWEEN.Easing.Quadratic.InOut);
+slowTween = new TWEEN.Tween(velocity).to({v : targetVelocity}, 500).easing(TWEEN.Easing.Quadratic.InOut);
+
+function startSpeedup (){
+    slowTween.stop();
+    speedTween.start();
+}
+
+function endSpeedup (){
+    speedTween.stop();
+    slowTween.start();
+}
 //BIG boi function that sends request to backend 
 // gets choices back and chooses them based on the imgae hash
 function submitQuestion() {
@@ -53,7 +70,7 @@ function submitQuestion() {
     //fade out the questions. rest is in the styling.js
     document.getElementById("querry").style.opacity = '0';
     //set fast to true 
-    fast = true;
+    startSpeedup();
 
     // TODO 
     // whatever CSS class switching (fade out/in stuff) needs to happen
@@ -106,3 +123,12 @@ function toDataURL(src, callback, outputFormat) {
   }
 }
 
+function scrollDown(){
+    const secondPage = document.querySelector('#secondPage');
+    secondPage.scrollIntoView({ block: "start", inline: "nearest", behavior : "smooth" });
+}
+
+function scrollUp(){
+    const firstPage = document.querySelector('#firstPage');
+    firstPage.scrollIntoView({ block: "start", inline: "nearest", behavior : "smooth" });
+}
