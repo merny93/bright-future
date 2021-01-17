@@ -77,22 +77,22 @@ main {
 }
 
 textarea::-webkit-input-placeholder {
-  color: rgb(240, 240, 240);
+  color: rgb(148, 148, 148);
   /* color: rgb(224, 216, 97); */
 }
 
 textarea:-moz-placeholder { /* Firefox 18- */
-  color: rgb(240, 240, 240);
+  color: rgb(148, 148, 148);
   /* color: rgb(224, 216, 97); */
 }
 
 textarea::-moz-placeholder {  /* Firefox 19+ */
-  color: rgb(240, 240, 240);
+  color: rgb(148, 148, 148);
   /* color: rgb(224, 216, 97); */
 }
 
 textarea:-ms-input-placeholder {
-  color: rgb(240, 240, 240);
+  color: rgb(148, 148, 148);
   /* color: rgb(224, 216, 97); */
 }  
 
@@ -112,7 +112,7 @@ button {
   color: white;
   border: none;
   cursor: pointer;
-  font-family: 'Dancing Script', cursive;
+  font-family: 'Raleway';
   font-size: large;
 }
 
@@ -128,12 +128,7 @@ button {
 }
 
 .descButton {
-  /* font-family: 'Dancing Script', cursive; */
-  font-size: .8em;
-  /* -webkit-transition-duration: 700ms;
-  -o-transition-duration: 700ms;
-  -moz-transition-duration: 700ms;
-  transition-duration: 700ms; */
+  font-size: .5em;
 }
 
 .descButton:hover {

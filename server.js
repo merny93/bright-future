@@ -28,11 +28,11 @@ function formatAnswers(zeAnswers) {
 function sendQuestion(prompt, callback) {
     let full_prompt = prompt_template + prompt + "\nA:";
     (async () => {
-        const url = 'https://api.openai.com/v1/engines/davinci/completions';
+        const url = 'https://api.openai.com/v1/engines/ada/completions';
         const params = {
             "prompt": full_prompt,
             "max_tokens": 30,
-            "temperature": 0.3
+            "temperature": 0.7
         };
         const headers = {
             'Authorization': `Bearer ${process.env.OPENAI_SECRET_KEY}`,
@@ -56,7 +56,12 @@ function sendQuestion(prompt, callback) {
 
 function makeShare(infoObject){
     let res = shareFacebook({
-        quote: "Q: " + infoObject.question + "\nA: " + infoObject.answer + "\n\nCheck out this webiste that makes decisions for you!",
+        quote: `
+        Q: ${infoObject.question} 
+        A: ${infoObject.answer}
+        
+        Check out this webiste that makes decisions for you!
+        `,
         href: 'https://inthestars.tech',
         redirect_uri: 'https://inthestars.tech',
         app_id: '461357091916957'
@@ -69,9 +74,9 @@ function makeShare(infoObject){
 app.post('/future', async(req,res) =>{
     // console.log(req.body.text)
     // res.send(req.body)
-    setTimeout(() => {  res.send(JSON.stringify( ["yes", "no"]));}, 1000);
+    // setTimeout(() => {  res.send(JSON.stringify( ["yes", "no"]));}, 1000);
     // res.send(JSON.stringify(["hellop", "no"]));
-    // sendQuestion(req.body.text, res);
+    sendQuestion(req.body.text, res);
 });
 
 app.post('/share', async(req,res) =>{

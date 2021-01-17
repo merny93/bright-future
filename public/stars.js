@@ -3,16 +3,12 @@ import { OrbitControls } from 'https://threejsfundamentals.org/threejs/resources
 
 const canvas = document.querySelector('#c');
 const scrollable = document.querySelector('#scrollable');
-const renderer = new THREE.WebGLRenderer({ 
+const renderer = new THREE.WebGLRenderer({
     canvas,
     alpha: true, // lets CSS background through
 });
 
-let raycaster;
-let mouse = {x: 0, y: 0};
-
 window.addEventListener("load", init);
-window.addEventListener('mousemove', raycast, false);
 
 // Standard Normal variate using Box-Muller transform.
 function randn_bm() {
@@ -22,29 +18,38 @@ function randn_bm() {
     return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
 }
 
-function raycast () {
-	// Update the mouse variable
-	// event.preventDefault();
-	mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
-    // console.log(mouse);
-    raycaster.setFromCamera( mouse, camera );    
-}
-
 function init() {
     let rot = 0;
+
+    let mouse = { x: 0, y: 0 };
+
+    window.addEventListener('mousemove', raycast, false);
+
     const scene = new THREE.Scene();
     scene.fog = new THREE.Fog(0xaaaaaa, 50, 2000);
 
-    const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 1, 5000);
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 5000);
     const geometry = new THREE.Geometry();
 
-    // const controls = new OrbitControls(camera, canvas);
-    // controls.enableDamping = true;
-    // controls.enablePan = false;
-    // controls.minDistance = 1.2;
-    // controls.maxDistance = 4;
-    // controls.update();
+    let raycaster1 = new THREE.Raycaster();
+    
+    raycaster1.params.Points.threshold = 1;
+    raycaster1.params.Line.threshold = 0;
+    raycaster1.params.Sprite.threshold = 1;
+
+    
+    let raycaster2 = new THREE.Raycaster();
+    
+    raycaster2.params.Points.threshold = 2;
+    raycaster2.params.Line.threshold = 1;
+    raycaster2.params.Sprite.threshold = 2;
+
+
+    let raycaster3 = new THREE.Raycaster();
+    
+    raycaster3.params.Points.threshold = 3;
+    raycaster3.params.Line.threshold = 1.5;
+    raycaster3.params.Sprite.threshold = 3;
 
     const sprite = new THREE.TextureLoader().load('disc.png');
 
@@ -69,15 +74,15 @@ function init() {
 
     const constellations = [];
     for (let i = 0; i < 100; i++) {
-        const star = new THREE.Vector3(); 
-        let theta = THREE.Math.randFloat(0, 2*Math.PI);
+        const star = new THREE.Vector3();
+        let theta = THREE.Math.randFloat(0, 2 * Math.PI);
         let zval = THREE.Math.randFloat(750, 850);
         star.x = Math.cos(theta) * zval;
-        star.y = randn_bm() * 40; 
+        star.y = randn_bm() * 40;
         star.z = Math.sin(theta) * zval;
         let neighbours = [star];
         for (let j = 0; j < 6; j++) {
-            const neighbour = new THREE.Vector3(); 
+            const neighbour = new THREE.Vector3();
             neighbour.x = star.x + THREE.Math.randFloatSpread(40);
             neighbour.y = star.y + THREE.Math.randFloatSpread(40);
             neighbour.z = star.z + THREE.Math.randFloatSpread(30);
@@ -86,12 +91,12 @@ function init() {
         constellations.push(neighbours);
     }
 
-    constellations.forEach(( pointList ) => {
-        pointList.forEach(( point ) => {
+    constellations.forEach((pointList) => {
+        pointList.forEach((point) => {
             geometry.vertices.push(point);
         });
     });
-    
+
     const starField = new THREE.Points(geometry, material);
     scene.add(starField);
 
@@ -103,13 +108,66 @@ function init() {
         // make this more transparent ?
     });
 
-    constellations.forEach((constellation) => { 
+    constellations.forEach((constellation) => {
         const linegeometry = new THREE.BufferGeometry().setFromPoints(constellation);
         const lines = new THREE.Line(linegeometry, linematerial);
-        scene.add(lines);    
+        scene.add(lines);
     });
 
-    // let renderRequested = false;
+    let object ;
+    function raycast() {
+        // Update the mouse variable
+        // event.preventDefault();
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+        // console.log(mouse);
+        raycaster1.setFromCamera(mouse, camera);
+        let intersects = raycaster1.intersectObjects(scene.children);
+        if (intersects.length > 0) {
+            if (intersects[0] !== object && object) {
+                object.material.color.set(0xffffff);
+            }
+            object = intersects[0].object;
+            object.material.color.set(0x88bbe7);
+            return;
+        } else {
+            if (object) {
+                object.material.color.set(0xffffff);
+                object = null;
+            }
+        }
+        raycaster2.setFromCamera(mouse, camera);
+        intersects = raycaster2.intersectObjects(scene.children);
+        if (intersects.length > 0) {
+            if (intersects[0] !== object && object) {
+                object.material.color.set(0xffffff);
+            }
+            object = intersects[0].object;
+            object.material.color.set(0x88bbe7);
+            return;
+        } else {
+            if (object) {
+                object.material.color.set(0xffffff);
+                object = null;
+            }
+        }
+        raycaster3.setFromCamera(mouse, camera);
+        intersects = raycaster3.intersectObjects(scene.children);
+        if (intersects.length > 0) {
+            if (intersects[0] !== object && object) {
+                object.material.color.set(0xffffff);
+            }
+            object = intersects[0].object;
+            object.material.color.set(0x88bbe7);
+        } else {
+            if (object) {
+                object.material.color.set(0xffffff);
+                object = null;
+            }
+        }
+    }
+
+
     function render() {
         TWEEN.update()
         rot += velocity.v;
@@ -117,7 +175,7 @@ function init() {
         camera.position.x = 1000 * Math.sin(radian);
         camera.position.z = 1000 * Math.cos(radian);
         const dy = (camera.position.y - (-scrollable.scrollTop));
-        camera.position.y = -scrollable.scrollTop + 0.99*dy;
+        camera.position.y = -scrollable.scrollTop + 0.99 * dy;
         camera.lookAt(new THREE.Vector3(100, 0, 50));
 
         // controls.update();
@@ -140,12 +198,4 @@ function init() {
     }
     onResize();
 
-    // function requestRenderIfNotRequested() {
-    //     if (!renderRequested) {
-    //         renderRequested = true;
-    //         requestAnimationFrame(render);
-    //     }
-    // }
-
-    // controls.addEventListener('change', requestRenderIfNotRequested);
 }

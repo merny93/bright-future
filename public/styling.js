@@ -77,6 +77,7 @@ window.addEventListener('load', function () {
             document.getElementById("answerholder").innerHTML = "";
             querryArea.classList.remove('hidden');
             querryArea.style.opacity = '1';
+            document.getElementById("questionarea").focus();
         }
     });
 }, false);
