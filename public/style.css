@@ -116,15 +116,15 @@ button {
   font-size: large;
 }
 
+button:focus {
+  outline: none;
+  border: none;
+}
+
 #enter {
   width: 20px;
   padding-top: 4px;
   padding-bottom: 2px;
-}
-
-#enter:focus {
-  outline: none;
-  border: none;
 }
 
 .descText {
