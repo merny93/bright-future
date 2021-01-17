@@ -14,7 +14,6 @@
 	<script src="script.js"></script>
 	<script src="styling.js"></script>
 	<script type="module" src="stars.js"></script>
-	<script src="hash.js"></script>
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Raleway&display=swap">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -46,12 +45,7 @@
 					<div id="answerholder"> </div>
 					<div class="moreinfo">
 						<button id="askagain" onclick="resetQuestion()">Ask another question</button>
-						<!-- <div style="text-align:center">
-							<p>Or scroll down to find out more about how we querried the stars</p>
-							<p><i class="fa fa-long-arrow-down"></i></p>
-						</div> -->
 					</div>
-					<!-- TODO MODEL ANSWER GETS POSTED HERE -->
 				</div>
 				<div id="info" onclick="scrollDown()">
 					<p>Scroll down to learn more about how we are querrying the stars</p>
@@ -66,15 +60,18 @@
 					In 1951, an engineer form the RCA CommunicationsCo made an interesting <a
 						href="https://www.eham.net/article/8828">observation</a>.
 					John H. Nelson speculated that relative position of the planets and stars affect radio waves.
-					Thus there is no better place to gather astrological data than the radio waves coming straight from
+					Thus, there is no better place to gather astrological data than the radio waves coming straight from
 					the cosmos.
 				</p>
-				<img src="http://lwalab.phys.unm.edu/lwatv2/lwatv.png?nocache=1610765785012">
+				<img id="mapimage" src="http://lwalab.phys.unm.edu/lwatv2/lwatv.png?nocache=1">
 				<p>
-					The Long Wavelength Array (LWA) is a radio telescope array probing the depths of the universe at
+					The <a href="http://www.phys.unm.edu/~lwa/abouthome.html">Long Wavelength Array (LWA)</a> is a radio telescope array probing the depths of the universe at
 					frequencies in the range of 10-88MHz.
-					Using a live feed from the telescope we are able to influence the responses to your questions based
-					on the stars.
+					The live feed from this telescope is used to make the hard decisions for you and answer any questions you may have about your life. 
+					The stars are as alive as you &mdash; thus, as the radio waves measured by LWA change from second to second, so will our advice.
+				</p>
+				<p>
+					Do not hesitate, go ahead and use cosmology to find out your destiny, fate, and what is written in the stars...
 				</p>
 			</div>
 		</div>

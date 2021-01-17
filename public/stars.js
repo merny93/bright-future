@@ -107,7 +107,7 @@ function init() {
         camera.position.z = 1000 * Math.cos(radian);
         const dy = (camera.position.y - (-scrollable.scrollTop));
         camera.position.y = -scrollable.scrollTop + 0.99*dy;
-        camera.lookAt(new THREE.Vector3(100, 0, 0));
+        camera.lookAt(new THREE.Vector3(100, 0, 50));
 
         // controls.update();
         renderer.render(scene, camera);

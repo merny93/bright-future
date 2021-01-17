@@ -63,6 +63,7 @@ window.addEventListener('load', function () {
             waitStars.classList.add('hidden');
             resultStars.classList.remove('hidden');
             resultStars.style.opacity = '1';
+            endSpeedup();
         }
         
     });
@@ -70,7 +71,6 @@ window.addEventListener('load', function () {
         console.log("hi")
         if (resultStars.style.opacity == "1"){
             //faded in
-            endSpeedup();
         } else {
             //fadded out
             resultStars.classList.add('hidden');
@@ -127,3 +127,19 @@ window.onload = function () {
     text.select();
     resize();
 }
+
+//refresh the image
+
+window.addEventListener('load', refreshMap);
+function refreshMap(){
+
+    let imgSrc = document.getElementById("mapimage").src
+
+    refreshWorker();
+
+    function refreshWorker(){
+        document.getElementById("mapimage").src = imgSrc + new Date().getTime();
+        setTimeout(refreshWorker, 2000);
+    }
+}
+

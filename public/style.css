@@ -63,7 +63,7 @@ main {
   font-family: 'Raleway';
   resize: none;
   width: calc(100% - 35px); 
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.5);
   color: white;
   caret-color: white;
   border: none;
@@ -77,19 +77,23 @@ main {
 }
 
 textarea::-webkit-input-placeholder {
-  color: rgb(226, 226, 226);
+  color: rgb(240, 240, 240);
+  /* color: rgb(224, 216, 97); */
 }
 
 textarea:-moz-placeholder { /* Firefox 18- */
-  color: rgb(226, 226, 226);  
+  color: rgb(240, 240, 240);
+  /* color: rgb(224, 216, 97); */
 }
 
 textarea::-moz-placeholder {  /* Firefox 19+ */
-  color: rgb(226, 226, 226);  
+  color: rgb(240, 240, 240);
+  /* color: rgb(224, 216, 97); */
 }
 
 textarea:-ms-input-placeholder {
-  color: rgb(226, 226, 226);  
+  color: rgb(240, 240, 240);
+  /* color: rgb(224, 216, 97); */
 }  
 
 p {
@@ -112,17 +116,18 @@ button {
 }
 
 #enter {
-  font-family: 'Raleway';
   width: 20px;
   padding-top: 4px;
-  padding-bottom: 0px;
-  /* TODO */
-  /* STYLE + ADD FAVICON INSTEAD OF TEXT */
+  padding-bottom: 2px;
+}
+
+#enter:focus {
+  outline: none;
+  border: none;
 }
 
 #askagain {
   font-family: 'Dancing Script', cursive;
-  text-decoration: underline;
   font-size: 1em;
   /* -webkit-transition-duration: 700ms;
   -o-transition-duration: 700ms;
@@ -131,7 +136,9 @@ button {
 }
 
 #askagain:hover {
-  color: gray;
+  color: #bee1ff;
+  font-size: 1em;
+  text-decoration: underline;
   opacity: 1;
 }
 
@@ -178,12 +185,16 @@ button {
 
 #info {
   font-family: 'Dancing Script', cursive;
-  font-size: 1.3em;
+  font-size: 1.4em;
   position: absolute;
-  bottom: 40px;
+  padding: 40px;
+  bottom: 0px;
   cursor: pointer;
 }
 
+#info:hover {
+  color: #bee1ff
+}
 /* SECOND PAGE  */
 
 #upArrow {
@@ -195,9 +206,17 @@ button {
   cursor: pointer;
 }
 
+#upArrow:hover {
+  color: #bee1ff;
+}
+
 #secondPage {
   font-family: 'Raleway';
-  padding-left: ;
+}
+
+#secondPage p {
+  width: 700px;
+  max-width: 75vw;
 }
 
 a {
@@ -212,4 +231,11 @@ a {
 a:hover {
   color: #88bbe7;
   text-decoration-thickness: thin;
+}
+
+img {
+  width: min(60vw, 600px);
+  padding: 1em;
+  mix-blend-mode: screen;
+  will-change: opacity;
 }

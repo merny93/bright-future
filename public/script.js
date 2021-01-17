@@ -3,19 +3,41 @@ const factor = 50;
 let velocity = {v : targetVelocity};
 let speedTween;
 let slowTween;
+let timeout;
 
 speedTween = new TWEEN.Tween(velocity).to({v : factor * targetVelocity}, 2000).easing(TWEEN.Easing.Quadratic.InOut);
-slowTween = new TWEEN.Tween(velocity).to({v : targetVelocity}, 500).easing(TWEEN.Easing.Quadratic.InOut);
+slowTween = new TWEEN.Tween(velocity).to({v : targetVelocity}, 800).easing(TWEEN.Easing.Quadratic.InOut);
+rewindTween = new TWEEN.Tween(velocity).to({v : -factor * targetVelocity}, 1000).easing(TWEEN.Easing.Quadratic.InOut);
+
+timeout = window.setTimeout(() => {
+    slowTween.stop();
+    speedTween.stop();
+    rewindTween.stop();
+    slowTween.start();
+}, 1000)
 
 function startSpeedup (){
+    window.setTimeout(timeout);
     slowTween.stop();
+    rewindTween.stop();
     speedTween.start();
 }
 
 function endSpeedup (){
+    window.setTimeout(timeout);
     speedTween.stop();
+    rewindTween.stop();
     slowTween.start();
 }
+
+function rewind(){
+    window.clearTimeout(timeout);
+    slowTween.stop();
+    speedTween.stop();
+    rewindTween.start();
+    window.setTimeout(timeout);
+}
+
 //BIG boi function that sends request to backend 
 // gets choices back and chooses them based on the imgae hash
 function submitQuestion() {
