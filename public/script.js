@@ -181,6 +181,6 @@ function karenShare(){
             window.open(response);    
         }
     };
-    let data = {question: document.getElementById('questionarea').value, answer: document.getElementById("answerholder").innerHTML};
+    let data = {platform:"facebook", question: document.getElementById('questionarea').value, answer: document.getElementById("answerholder").innerHTML};
     xhttp.send(JSON.stringify(data));
 }

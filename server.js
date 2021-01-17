@@ -55,28 +55,42 @@ function sendQuestion(prompt, callback) {
 }
 
 function makeShare(infoObject){
-    let res = shareFacebook({
-        quote: `
-        Q: ${infoObject.question} 
-        A: ${infoObject.answer}
-        
-        Check out this webiste that makes decisions for you!
-        `,
-        href: 'https://inthestars.tech',
-        redirect_uri: 'https://inthestars.tech',
-        app_id: '461357091916957'
-      })
-    // console.log(res)
-    return res
+    if (infoObject.platform == "facebook"){
+        let res = shareFacebook({
+            quote: `
+            Q: ${infoObject.question} 
+            A: ${infoObject.answer}
+            
+            Check out this webiste that makes decisions for you!
+            `,
+            href: 'https://inthestars.tech',
+            redirect_uri: 'https://inthestars.tech',
+            app_id: '461357091916957'
+        })
+        // console.log(res)
+        return res
+    } else if (infoObject.platform == "twitter"){
+        let res = shareFacebook({
+            text: `
+            Q: ${infoObject.question} 
+            A: ${infoObject.answer}
+            
+            Check out this webiste that makes decisions for you!
+            `,
+            url: 'https://inthestars.tech'
+        })
+        // console.log(res)
+        return res
+    }
 }
 
 //route for the prediction
 app.post('/future', async(req,res) =>{
     // console.log(req.body.text)
     // res.send(req.body)
-    // setTimeout(() => {  res.send(JSON.stringify( ["yes", "no"]));}, 1000);
+    setTimeout(() => {  res.send(JSON.stringify( ["Yes Daddy, I will do it", "No! I have been a naughty boi"]));}, 1000);
     // res.send(JSON.stringify(["hellop", "no"]));
-    sendQuestion(req.body.text, res);
+    // sendQuestion(req.body.text, res);
 });
 
 app.post('/share', async(req,res) =>{

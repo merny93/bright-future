@@ -7,7 +7,8 @@ const renderer = new THREE.WebGLRenderer({
     canvas,
     alpha: true, // lets CSS background through
 });
-
+let material;
+let sprite;
 window.addEventListener("load", init);
 
 // Standard Normal variate using Box-Muller transform.
@@ -16,6 +17,14 @@ function randn_bm() {
     while (u === 0) u = Math.random(); //Converting [0,1) to (0,1)
     while (v === 0) v = Math.random();
     return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+}
+
+function createEffect(object){
+    return;
+}
+
+function resetEffect(object){
+    return;
 }
 
 function init() {
@@ -51,7 +60,7 @@ function init() {
     raycaster3.params.Line.threshold = 1.5;
     raycaster3.params.Sprite.threshold = 3;
 
-    const sprite = new THREE.TextureLoader().load('disc.png');
+    sprite = new THREE.TextureLoader().load('disc.png');
 
     for (let i = 0; i < 10000; i++) {
         const star = new THREE.Vector3();
@@ -63,7 +72,7 @@ function init() {
         geometry.vertices.push(star)
     }
 
-    const material = new THREE.PointsMaterial({
+    material = new THREE.PointsMaterial({
         color: 0xffffff,
         size: 3,
         map: sprite,
@@ -125,14 +134,14 @@ function init() {
         let intersects = raycaster1.intersectObjects(scene.children);
         if (intersects.length > 0) {
             if (intersects[0] !== object && object) {
-                object.material.color.set(0xffffff);
+                resetEffect(object);
             }
             object = intersects[0].object;
-            object.material.color.set(0x88bbe7);
+            createEffect(object);
             return;
         } else {
             if (object) {
-                object.material.color.set(0xffffff);
+                resetEffect(object);
                 object = null;
             }
         }
@@ -140,14 +149,14 @@ function init() {
         intersects = raycaster2.intersectObjects(scene.children);
         if (intersects.length > 0) {
             if (intersects[0] !== object && object) {
-                object.material.color.set(0xffffff);
+                resetEffect(object);
             }
             object = intersects[0].object;
-            object.material.color.set(0x88bbe7);
+            createEffect(object);
             return;
         } else {
             if (object) {
-                object.material.color.set(0xffffff);
+                resetEffect(object);
                 object = null;
             }
         }
@@ -155,13 +164,14 @@ function init() {
         intersects = raycaster3.intersectObjects(scene.children);
         if (intersects.length > 0) {
             if (intersects[0] !== object && object) {
-                object.material.color.set(0xffffff);
+                resetEffect(object);
             }
             object = intersects[0].object;
-            object.material.color.set(0x88bbe7);
+            createEffect(object);
+            return;
         } else {
             if (object) {
-                object.material.color.set(0xffffff);
+                resetEffect(object);
                 object = null;
             }
         }
