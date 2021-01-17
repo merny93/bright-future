@@ -79,7 +79,7 @@ function makeShare(infoObject){
 app.post('/future', async(req,res) =>{
     // console.log(req.body.text)
     // res.send(req.body)
-    setTimeout(() => {  res.send(JSON.stringify( ["Yes, you totally should", "Nah, that does not sound like a good idea"]));}, 1000);
+    setTimeout(() => {  res.send(JSON.stringify( ["BRUUU, you totally should", "BRAAAA, that does not sound like a good idea"]));}, 1000);
     // res.send(JSON.stringify(["hellop", "no"]));
     // sendQuestion(req.body.text, res);
 });
