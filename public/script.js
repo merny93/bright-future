@@ -108,6 +108,7 @@ function onTestChange() {
     // If the user has pressed enter
     if (key === 13) {
         event.preventDefault();
+        document.getElementById('questionarea').blur();
         document.getElementById("enter").click();
     }
 }
