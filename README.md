@@ -8,7 +8,7 @@ Extract possible answers from you prompts with gpt-3 and then use live telescope
 
 ## How to run
 
-Check out a version without GPT-3 connected to it at inthestars.tech (without the ML it can only answer yes or no questions)
+Check out a version without GPT-3 connected to it  [here](http://inthestars.tech/) (without the ML it can only answer yes or no questions)
 
 To run with ML you need beta access to GPT-3 API and then you can launch the server with (provided you have the dependancies):
 
