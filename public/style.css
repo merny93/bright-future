@@ -112,6 +112,7 @@ button {
   color: white;
   border: none;
   cursor: pointer;
+  font-family: 'Dancing Script', cursive;
   font-size: large;
 }
 
@@ -126,24 +127,24 @@ button {
   border: none;
 }
 
-#askagain {
-  font-family: 'Dancing Script', cursive;
-  font-size: 1em;
+.descButton {
+  /* font-family: 'Dancing Script', cursive; */
+  font-size: .8em;
   /* -webkit-transition-duration: 700ms;
   -o-transition-duration: 700ms;
   -moz-transition-duration: 700ms;
   transition-duration: 700ms; */
 }
 
-#askagain:hover {
+.descButton:hover {
   color: #bee1ff;
-  font-size: 1em;
+  /* font-size: 1em; */
   text-decoration: underline;
   opacity: 1;
 }
 
 .moreinfo {
-  padding-top: 1em;
+  margin-top: 2em;
   text-align: center;
 }
 
@@ -187,7 +188,7 @@ button {
   font-family: 'Dancing Script', cursive;
   font-size: 1.4em;
   position: absolute;
-  padding: 40px;
+  padding: 30px;
   bottom: 0px;
   cursor: pointer;
 }
@@ -195,6 +196,7 @@ button {
 #info:hover {
   color: #bee1ff
 }
+
 /* SECOND PAGE  */
 
 #upArrow {
@@ -202,7 +204,7 @@ button {
   font-size: large;
   position: absolute;
   top: 0px;
-  padding: 40px 50px 50px 50px;
+  padding: 30px 50px 30px 50px;
   cursor: pointer;
 }
 

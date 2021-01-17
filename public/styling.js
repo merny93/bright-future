@@ -84,6 +84,7 @@ window.addEventListener('load', function () {
 
 function resetQuestion(){
     //fadeout answer box
+    rewind();
     document.getElementById("answer").style.opacity = "0";
     document.getElementById("questionarea").value = "";
 }

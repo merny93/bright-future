@@ -1,3 +1,4 @@
+
 const targetVelocity = .005;
 const factor = 50;
 let velocity = {v : targetVelocity};
@@ -5,37 +6,43 @@ let speedTween;
 let slowTween;
 let timeout;
 
-speedTween = new TWEEN.Tween(velocity).to({v : factor * targetVelocity}, 2000).easing(TWEEN.Easing.Quadratic.InOut);
-slowTween = new TWEEN.Tween(velocity).to({v : targetVelocity}, 800).easing(TWEEN.Easing.Quadratic.InOut);
-rewindTween = new TWEEN.Tween(velocity).to({v : -factor * targetVelocity}, 1000).easing(TWEEN.Easing.Quadratic.InOut);
-
-timeout = window.setTimeout(() => {
-    slowTween.stop();
-    speedTween.stop();
-    rewindTween.stop();
-    slowTween.start();
-}, 1000)
+speedTween  = new TWEEN.Tween(velocity).to({v : factor * targetVelocity}, 2000   ).easing(TWEEN.Easing.Quadratic.InOut);
+slowTween   = new TWEEN.Tween(velocity).to({v : targetVelocity},  800).easing(TWEEN.Easing.Quadratic.InOut);
+resetTween  = new TWEEN.Tween(velocity).to({v : targetVelocity},  300).easing(TWEEN.Easing.Quadratic.InOut);
+rewindTween = new TWEEN.Tween(velocity).to({v : (-10*factor) * targetVelocity}, 200).easing(TWEEN.Easing.Quadratic.InOut);
 
 function startSpeedup (){
-    window.setTimeout(timeout);
+    console.log("Starting speed");
+    window.clearTimeout(timeout);
+    resetTween.stop();
     slowTween.stop();
     rewindTween.stop();
     speedTween.start();
 }
 
 function endSpeedup (){
-    window.setTimeout(timeout);
+    console.log("Ending speed");
+    window.clearTimeout(timeout);
+    resetTween.stop();
     speedTween.stop();
     rewindTween.stop();
     slowTween.start();
 }
 
 function rewind(){
+    console.log("Starting rewind");
     window.clearTimeout(timeout);
+    resetTween.stop();
     slowTween.stop();
     speedTween.stop();
     rewindTween.start();
-    window.setTimeout(timeout);
+    timeout = window.setTimeout(() => {
+        console.log("Ending rewind");
+        slowTween.stop();
+        speedTween.stop();
+        rewindTween.stop();
+        resetTween.start();
+    }, 300)
 }
 
 //BIG boi function that sends request to backend 
@@ -50,11 +57,14 @@ function submitQuestion() {
         if (this.readyState == 4 && this.status == 200) {
             // Response
             let response = JSON.parse(this.responseText);
+
             // console.log(response)
             toDataURL(
-                'http://lwalab.phys.unm.edu/lwatv2/lwatv.png?nocache=1610765785012',
+                'http://lwalab.phys.unm.edu/lwatv2/lwatv.png?nocache=1' + new Date().getTime(),
                 function (dataUrl) {
-                    let starsChoice = Math.abs(dataUrl.hashCode() % (response.length));
+                    let madeHash = dataUrl.hashCode();
+                    console.log(madeHash)
+                    let starsChoice = Math.abs( madeHash% (response.length));
                     let finalResponse = response[starsChoice]
                     console.log('RESULT:', starsChoice);
                     console.log(response)
@@ -96,6 +106,7 @@ function submitQuestion() {
 
     // TODO 
     // whatever CSS class switching (fade out/in stuff) needs to happen
+
 }
   
 //detect the enter submission
@@ -153,4 +164,23 @@ function scrollDown(){
 function scrollUp(){
     const firstPage = document.querySelector('#firstPage');
     firstPage.scrollIntoView({ block: "start", inline: "nearest", behavior : "smooth" });
+}
+///share to facebook button
+
+function karenShare(){
+    //create the request
+    //we are sending a post request with a return promise
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/share", true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            // Response
+            let response = JSON.parse(this.responseText);
+            console.log(response);
+            window.open(response);    
+        }
+    };
+    let data = {question: document.getElementById('questionarea').value, answer: document.getElementById("answerholder").innerHTML};
+    xhttp.send(JSON.stringify(data));
 }

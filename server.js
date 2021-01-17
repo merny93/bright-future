@@ -1,6 +1,6 @@
 var express = require('express');
 const bodyParser = require('body-parser');
-
+const shareFacebook = require('share-facebook');
 var app = express();
 
 app.use(express.static(__dirname + '/public')); // exposes index.html, per below
@@ -54,13 +54,29 @@ function sendQuestion(prompt, callback) {
     })();
 }
 
+function makeShare(infoObject){
+    let res = shareFacebook({
+        quote: "Q: " + infoObject.question + "\nA: " + infoObject.answer + "\n\nCheck out this webiste that makes decisions for you!",
+        href: 'https://inthestars.tech',
+        redirect_uri: 'https://inthestars.tech',
+        app_id: '461357091916957'
+      })
+    // console.log(res)
+    return res
+}
+
 //route for the prediction
 app.post('/future', async(req,res) =>{
     // console.log(req.body.text)
     // res.send(req.body)
-    setTimeout(() => {  res.send(JSON.stringify(["hellop", "no"])); }, 1000);
+    setTimeout(() => {  res.send(JSON.stringify( ["yes", "no"]));}, 1000);
     // res.send(JSON.stringify(["hellop", "no"]));
     // sendQuestion(req.body.text, res);
+});
+
+app.post('/share', async(req,res) =>{
+    
+    res.send(JSON.stringify(makeShare(req.body)));
 });
 
 app.listen(3000)

@@ -8,9 +8,11 @@ const renderer = new THREE.WebGLRenderer({
     alpha: true, // lets CSS background through
 });
 
-
+let raycaster;
+let mouse = {x: 0, y: 0};
 
 window.addEventListener("load", init);
+window.addEventListener('mousemove', raycast, false);
 
 // Standard Normal variate using Box-Muller transform.
 function randn_bm() {
@@ -18,6 +20,15 @@ function randn_bm() {
     while (u === 0) u = Math.random(); //Converting [0,1) to (0,1)
     while (v === 0) v = Math.random();
     return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+}
+
+function raycast () {
+	// Update the mouse variable
+	// event.preventDefault();
+	mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+    // console.log(mouse);
+    raycaster.setFromCamera( mouse, camera );    
 }
 
 function init() {
@@ -52,12 +63,12 @@ function init() {
         size: 3,
         map: sprite,
         transparent: true, // make the material transparent
-        // alphaTest: 0.5,
+        alphaTest: 0.2,
         blending: THREE.AdditiveBlending,
     });
 
     const constellations = [];
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 100; i++) {
         const star = new THREE.Vector3(); 
         let theta = THREE.Math.randFloat(0, 2*Math.PI);
         let zval = THREE.Math.randFloat(750, 850);
