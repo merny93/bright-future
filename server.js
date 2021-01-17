@@ -89,4 +89,4 @@ app.post('/share', async(req,res) =>{
     res.send(JSON.stringify(makeShare(req.body)));
 });
 
-app.listen(3000)
+app.listen(process.env.PORT);
