@@ -167,7 +167,7 @@ function scrollUp(){
 }
 ///share to facebook button
 
-function karenShare(){
+function karenShare(platformStr){
     //create the request
     //we are sending a post request with a return promise
     let xhttp = new XMLHttpRequest();
@@ -181,6 +181,6 @@ function karenShare(){
             window.open(response);    
         }
     };
-    let data = {platform:"facebook", question: document.getElementById('questionarea').value, answer: document.getElementById("answerholder").innerHTML};
+    let data = {platform:platformStr, question: document.getElementById('questionarea').value, answer: document.getElementById("answerholder").innerHTML};
     xhttp.send(JSON.stringify(data));
 }

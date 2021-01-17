@@ -104,6 +104,8 @@ p {
 
 #answerholder {
   text-align: center;
+  font-size: larger;
+  text-shadow: .5px .5px #88bbe7;
 }
 
 button {
@@ -127,12 +129,20 @@ button {
   border: none;
 }
 
-.descButton {
+.descText {
+  font-family: 'Raleway';
   font-size: .5em;
 }
 
-.descButton:hover {
+.descButton {
+  font-size: .5em;
   color: #bee1ff;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.descButton:hover {
+  color: #88bbe7;
   /* font-size: 1em; */
   text-decoration: underline;
   opacity: 1;
@@ -166,6 +176,17 @@ button {
   scroll-snap-align: start;
 }
 
+#thirdPage{
+  position: relative;
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;  
+  min-height: 100%;
+  width: 100%;
+  scroll-snap-align: start;
+}
+
 #scrollable {
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
@@ -180,8 +201,8 @@ button {
 }
 
 #info {
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.4em;
+  font-family: 'Raleway';
+  font-size: 1em;
   position: absolute;
   padding: 30px;
   bottom: 0px;
@@ -207,11 +228,11 @@ button {
   color: #bee1ff;
 }
 
-#secondPage {
+.descPage {
   font-family: 'Raleway';
 }
 
-#secondPage p {
+.descPage p {
   width: 700px;
   max-width: 75vw;
 }

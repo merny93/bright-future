@@ -1,6 +1,7 @@
 var express = require('express');
 const bodyParser = require('body-parser');
 const shareFacebook = require('share-facebook');
+const { shareTwitterURL } = require('share-twitter');
 var app = express();
 
 app.use(express.static(__dirname + '/public')); // exposes index.html, per below
@@ -57,12 +58,7 @@ function sendQuestion(prompt, callback) {
 function makeShare(infoObject){
     if (infoObject.platform == "facebook"){
         let res = shareFacebook({
-            quote: `
-            Q: ${infoObject.question} 
-            A: ${infoObject.answer}
-            
-            Check out this webiste that makes decisions for you!
-            `,
+            quote: `Q: ${infoObject.question}. A: ${infoObject.answer}. Check out this website that makes decisions for you!`,
             href: 'https://inthestars.tech',
             redirect_uri: 'https://inthestars.tech',
             app_id: '461357091916957'
@@ -70,14 +66,9 @@ function makeShare(infoObject){
         // console.log(res)
         return res
     } else if (infoObject.platform == "twitter"){
-        let res = shareFacebook({
-            text: `
-            Q: ${infoObject.question} 
-            A: ${infoObject.answer}
-            
-            Check out this webiste that makes decisions for you!
-            `,
-            url: 'https://inthestars.tech'
+        let res = shareTwitterURL({
+            text: `Q: ${infoObject.question}. A: ${infoObject.answer}. Check out this website that makes decisions for you!`,
+            url: 'https://inthestars.tech',
         })
         // console.log(res)
         return res

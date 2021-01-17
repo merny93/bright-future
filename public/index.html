@@ -10,7 +10,9 @@
 
 <body>
 	<!-- <img src="http://lwalab.phys.unm.edu/lwatv2/lwatv.png?nocache=1610765785012" id="myimage" /> -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js" integrity="sha512-lIKG1kC5TMb1Zx32vdz1n31YJMZRknVY20U9MJ28hD3y2c0OKN0Ce5NhJji78v8zX5UOSsm+MTBOcJt7yMBnSg==" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"
+		integrity="sha512-lIKG1kC5TMb1Zx32vdz1n31YJMZRknVY20U9MJ28hD3y2c0OKN0Ce5NhJji78v8zX5UOSsm+MTBOcJt7yMBnSg=="
+		crossorigin="anonymous"></script>
 	<script src="script.js"></script>
 	<script src="styling.js"></script>
 	<script type="module" src="stars.js"></script>
@@ -30,8 +32,8 @@
 				<div id='querry' class='landing hidden'>
 					<!-- TODO fade in after welcome disappears -->
 					<p style="display: flex">
-						<textarea maxlength="100" id="questionarea" rows="1" placeholder="e.g. What should I eat for dinner?"
-							onkeypress="onTestChange()"></textarea>
+						<textarea maxlength="100" id="questionarea" rows="1"
+							placeholder="e.g. What should I eat for dinner?" onkeypress="onTestChange()"></textarea>
 						<button type="button" id="enter" onclick="submitQuestion()">
 							<i class="fa fa-long-arrow-right"></i>
 						</button>
@@ -45,15 +47,18 @@
 					<div id="answerholder"> </div>
 					<div class="moreinfo">
 						<button id="askagain" class="descButton" onclick="resetQuestion()">Ask another question</button>
-						<button id="facebook" class="descButton" onclick="karenShare()">Share your results to Facebook</button>
+						<span class="descText" style="padding-left: 4px;">or share your results to</span>
+						<button id="facebook" class="descButton" onclick="karenShare('facebook')">Facebook</button>
+						<span class="descText">and</span>
+						<button id="twitter" class="descButton" onclick="karenShare('twitter')">Twitter</button></span>
 					</div>
 				</div>
 				<div id="info" onclick="scrollDown()">
-					<p>Scroll down to learn more about how we are querrying the stars</p>
+					<p>Scroll down to learn more about how we are querying the stars</p>
 					<p><i class="fa fa-angle-double-down"></i></p>
 				</div>
 			</div>
-			<div id='secondPage'>
+			<div id='secondPage' class="descPage">
 				<div id="upArrow" onclick="scrollUp()">
 					<p><i class="fa fa-angle-double-up"></i></p>
 				</div>
@@ -66,16 +71,38 @@
 				</p>
 				<img id="mapimage" src="http://lwalab.phys.unm.edu/lwatv2/lwatv.png?nocache=1">
 				<p>
-					The <a href="http://www.phys.unm.edu/~lwa/abouthome.html">Long Wavelength Array (LWA)</a> is a radio telescope array probing the depths of the universe at
+					The <a href="http://www.phys.unm.edu/~lwa/abouthome.html">Long Wavelength Array (LWA)</a> is a radio
+					telescope array probing the depths of the universe at
 					frequencies in the range of 10-88MHz.
-					The live feed from this telescope is used to make the hard decisions for you and answer any questions you may have about your life. 
-					The stars are as alive as you &mdash; thus, as the radio waves measured by LWA change from second to second, so will our advice.
+					The live feed from this telescope is used to make the hard decisions for you and answer any
+					questions you may have about your life.
+					The stars are as alive as you &mdash; thus, as the radio waves measured by LWA change from second to
+					second, so will our advice.
 				</p>
 				<p>
-					Do not hesitate, go ahead and use cosmology to find out your destiny, fate, and what is written in the stars...
+					Do not hesitate, go ahead and use cosmology to find out your destiny, fate, and what is written in
+					the stars...
+				</p>
+				<div id="info" onclick="scrollDownSecond()">
+					<p><i class="fa fa-angle-double-down"></i></p>
+				</div>
+			</div>
+			<div id='thirdPage' class="descPage">
+				<div id="upArrow" onclick="scrollUpThird()">
+					<p><i class="fa fa-angle-double-up"></i></p>
+				</div>
+				<p>This project was inspired by our joint loves of physics, web graphics, machine learning and all
+					things aesthetic.</p>
+				<p>After receiving your query to the stars, we parse it and generate a few potential answers to your
+					questions using <a href='https://openai.com/blog/openai-api/'>OpenAI's GPT-3</a>, a language model
+					using deep learning to understand and produce human-like text. </p>
+				<p>We then produce a hash of the live feed of the <a
+						href="http://www.phys.unm.edu/~lwa/abouthome.html">LWA radio telescope</a>, and use this to
+					determine which of GPT-3's answers to return to you. </p>
+				<p>The background of stars and constellations was generated in JavaScript using <a
+						href='https://threejs.org/'>THREE.js</a>.
 				</p>
 			</div>
-
 		</div>
 	</main>
 </body>

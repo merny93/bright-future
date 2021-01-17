@@ -9,7 +9,20 @@ const renderer = new THREE.WebGLRenderer({
 });
 let material;
 let sprite;
+let virtualY = 0;
 window.addEventListener("load", init);
+
+function yMap(y) {
+    if (y <= window.innerHeight){
+        return { ny: -y, dtheta: 0};
+    }
+    else{
+        return { 
+            ny: (-window.innerHeight + 2 * (y - window.innerHeight)), 
+            dtheta: Math.PI * ((y - window.innerHeight)/(window.innerHeight  ))
+        };
+    }
+}
 
 // Standard Normal variate using Box-Muller transform.
 function randn_bm() {
@@ -181,11 +194,13 @@ function init() {
     function render() {
         TWEEN.update()
         rot += velocity.v;
-        const radian = (rot * Math.PI) / 180;
+        const dy = (virtualY - (scrollable.scrollTop));
+        virtualY = scrollable.scrollTop + 0.99 * dy;
+        const { ny, dtheta } = yMap(virtualY);
+        camera.position.y = ny;
+        const radian = (rot * Math.PI) / 180 + dtheta;
         camera.position.x = 1000 * Math.sin(radian);
         camera.position.z = 1000 * Math.cos(radian);
-        const dy = (camera.position.y - (-scrollable.scrollTop));
-        camera.position.y = -scrollable.scrollTop + 0.99 * dy;
         camera.lookAt(new THREE.Vector3(100, 0, 50));
 
         // controls.update();
