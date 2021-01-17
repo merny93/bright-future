@@ -43,9 +43,9 @@ function resetEffect(object){
 function init() {
     let rot = 0;
 
-    let mouse = { x: 0, y: 0 };
+    // let mouse = { x: 0, y: 0 };
 
-    window.addEventListener('mousemove', raycast, false);
+    // window.addEventListener('mousemove', raycast, false);
 
     const scene = new THREE.Scene();
     scene.fog = new THREE.Fog(0xaaaaaa, 50, 2000);
@@ -53,25 +53,25 @@ function init() {
     const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 5000);
     const geometry = new THREE.Geometry();
 
-    let raycaster1 = new THREE.Raycaster();
+    // let raycaster1 = new THREE.Raycaster();
     
-    raycaster1.params.Points.threshold = 1;
-    raycaster1.params.Line.threshold = 0;
-    raycaster1.params.Sprite.threshold = 1;
+    // raycaster1.params.Points.threshold = 1;
+    // raycaster1.params.Line.threshold = 0;
+    // raycaster1.params.Sprite.threshold = 1;
 
     
-    let raycaster2 = new THREE.Raycaster();
+    // let raycaster2 = new THREE.Raycaster();
     
-    raycaster2.params.Points.threshold = 2;
-    raycaster2.params.Line.threshold = 1;
-    raycaster2.params.Sprite.threshold = 2;
+    // raycaster2.params.Points.threshold = 2;
+    // raycaster2.params.Line.threshold = 1;
+    // raycaster2.params.Sprite.threshold = 2;
 
 
-    let raycaster3 = new THREE.Raycaster();
+    // let raycaster3 = new THREE.Raycaster();
     
-    raycaster3.params.Points.threshold = 3;
-    raycaster3.params.Line.threshold = 1.5;
-    raycaster3.params.Sprite.threshold = 3;
+    // raycaster3.params.Points.threshold = 3;
+    // raycaster3.params.Line.threshold = 1.5;
+    // raycaster3.params.Sprite.threshold = 3;
 
     sprite = new THREE.TextureLoader().load('disc.png');
 
@@ -136,60 +136,87 @@ function init() {
         scene.add(lines);
     });
 
-    let object ;
-    function raycast() {
-        // Update the mouse variable
-        // event.preventDefault();
-        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
-        // console.log(mouse);
-        raycaster1.setFromCamera(mouse, camera);
-        let intersects = raycaster1.intersectObjects(scene.children);
-        if (intersects.length > 0) {
-            if (intersects[0] !== object && object) {
-                resetEffect(object);
-            }
-            object = intersects[0].object;
-            createEffect(object);
-            return;
-        } else {
-            if (object) {
-                resetEffect(object);
-                object = null;
-            }
+    // let object ;
+    // function raycast() {
+    //     // Update the mouse variable
+    //     // event.preventDefault();
+    //     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    //     mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+    //     // console.log(mouse);
+    //     raycaster1.setFromCamera(mouse, camera);
+    //     let intersects = raycaster1.intersectObjects(scene.children);
+    //     if (intersects.length > 0) {
+    //         if (intersects[0] !== object && object) {
+    //             resetEffect(object);
+    //         }
+    //         object = intersects[0].object;
+    //         createEffect(object);
+    //         return;
+    //     } else {
+    //         if (object) {
+    //             resetEffect(object);
+    //             object = null;
+    //         }
+    //     }
+    //     raycaster2.setFromCamera(mouse, camera);
+    //     intersects = raycaster2.intersectObjects(scene.children);
+    //     if (intersects.length > 0) {
+    //         if (intersects[0] !== object && object) {
+    //             resetEffect(object);
+    //         }
+    //         object = intersects[0].object;
+    //         createEffect(object);
+    //         return;
+    //     } else {
+    //         if (object) {
+    //             resetEffect(object);
+    //             object = null;
+    //         }
+    //     }
+    //     raycaster3.setFromCamera(mouse, camera);
+    //     intersects = raycaster3.intersectObjects(scene.children);
+    //     if (intersects.length > 0) {
+    //         if (intersects[0] !== object && object) {
+    //             resetEffect(object);
+    //         }
+    //         object = intersects[0].object;
+    //         createEffect(object);
+    //         return;
+    //     } else {
+    //         if (object) {
+    //             resetEffect(object);
+    //             object = null;
+    //         }
+    //     }
+    // }
+    let inStartup = true;
+    let startVelocity = {rad : -Math.PI, y : 1};
+    const startupTween = new TWEEN.Tween(startVelocity).to({rad : 0, y: 0},  openingWait + splashLength + 1000)
+        .easing(TWEEN.Easing.Cubic.Out).onComplete(() => { inStartup = false; }).start();
+
+
+    
+    function startSpeedup(){
+        TWEEN.update();
+        rot += velocity.v;
+        const radian = (rot * Math.PI) / 180;
+        camera.position.y = 2000 * startVelocity.y * startVelocity.y;
+        camera.position.x = 1000 * Math.sin(startVelocity.rad + radian);
+        camera.position.z = 1000 * Math.cos(startVelocity.rad + radian);
+        
+        camera.lookAt(new THREE.Vector3(100, 0, 50));
+
+        renderer.render(scene, camera);
+        if (inStartup){
+            requestAnimationFrame(startSpeedup);
         }
-        raycaster2.setFromCamera(mouse, camera);
-        intersects = raycaster2.intersectObjects(scene.children);
-        if (intersects.length > 0) {
-            if (intersects[0] !== object && object) {
-                resetEffect(object);
-            }
-            object = intersects[0].object;
-            createEffect(object);
-            return;
-        } else {
-            if (object) {
-                resetEffect(object);
-                object = null;
-            }
-        }
-        raycaster3.setFromCamera(mouse, camera);
-        intersects = raycaster3.intersectObjects(scene.children);
-        if (intersects.length > 0) {
-            if (intersects[0] !== object && object) {
-                resetEffect(object);
-            }
-            object = intersects[0].object;
-            createEffect(object);
-            return;
-        } else {
-            if (object) {
-                resetEffect(object);
-                object = null;
-            }
+        else {
+            console.log(camera.position.y);
+            requestAnimationFrame(render);
         }
     }
 
+    startSpeedup();
 
     function render() {
         TWEEN.update()
@@ -197,7 +224,11 @@ function init() {
         const dy = (virtualY - (scrollable.scrollTop));
         virtualY = scrollable.scrollTop + 0.99 * dy;
         const { ny, dtheta } = yMap(virtualY);
-        camera.position.y = ny;
+        if (ny === -0){
+            camera.position.y = 0;
+        } else {
+            camera.position.y = ny;
+        }
         const radian = (rot * Math.PI) / 180 + dtheta;
         camera.position.x = 1000 * Math.sin(radian);
         camera.position.z = 1000 * Math.cos(radian);
@@ -208,7 +239,7 @@ function init() {
 
         requestAnimationFrame(render);
     }
-    render();
+
 
     window.addEventListener("resize", onResize);
 

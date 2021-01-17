@@ -12,7 +12,6 @@ resetTween  = new TWEEN.Tween(velocity).to({v : targetVelocity},  300).easing(TW
 rewindTween = new TWEEN.Tween(velocity).to({v : (-10*factor) * targetVelocity}, 200).easing(TWEEN.Easing.Quadratic.InOut);
 
 function startSpeedup (){
-    console.log("Starting speed");
     window.clearTimeout(timeout);
     resetTween.stop();
     slowTween.stop();
@@ -21,7 +20,6 @@ function startSpeedup (){
 }
 
 function endSpeedup (){
-    console.log("Ending speed");
     window.clearTimeout(timeout);
     resetTween.stop();
     speedTween.stop();
@@ -30,14 +28,12 @@ function endSpeedup (){
 }
 
 function rewind(){
-    console.log("Starting rewind");
     window.clearTimeout(timeout);
     resetTween.stop();
     slowTween.stop();
     speedTween.stop();
     rewindTween.start();
     timeout = window.setTimeout(() => {
-        console.log("Ending rewind");
         slowTween.stop();
         speedTween.stop();
         rewindTween.stop();
@@ -63,7 +59,7 @@ function submitQuestion() {
                 'http://lwalab.phys.unm.edu/lwatv2/lwatv.png?nocache=1' + new Date().getTime(),
                 function (dataUrl) {
                     let madeHash = dataUrl.hashCode();
-                    console.log(madeHash)
+                    console.log('HASH:', madeHash)
                     let starsChoice = Math.abs( madeHash% (response.length));
                     let finalResponse = response[starsChoice]
                     console.log('RESULT:', starsChoice);
@@ -72,12 +68,10 @@ function submitQuestion() {
                     //fade out its gonne handle the rest
                     if (document.getElementById("loading").classList.contains('ready')){
                         //the loading screen loaded in so we unload it
-                        console.log("fully loaded screen");
                         document.getElementById("loading").style.opacity = '0';
                         document.getElementById("loading").classList.remove('ready');
                     } else {
                         // we set the html already so the other function will handle
-                        console.log('partial screen');
                     }
                     
                     //THIS IS WHERE THE OUTPUT IS
@@ -97,7 +91,6 @@ function submitQuestion() {
 
     //send it out
     xhttp.send(JSON.stringify(data));
-    console.log("submitted");
     // input.value = "";
     //fade out the questions. rest is in the styling.js
     document.getElementById("querry").style.opacity = '0';
@@ -156,15 +149,21 @@ function toDataURL(src, callback, outputFormat) {
   }
 }
 
-function scrollDown(){
+function scrollToFirst(){
+    const firstPage = document.querySelector('#firstPage');
+    firstPage.scrollIntoView({ block: "start", inline: "nearest", behavior : "smooth" });
+}
+
+function scrollToSecond(){
     const secondPage = document.querySelector('#secondPage');
     secondPage.scrollIntoView({ block: "start", inline: "nearest", behavior : "smooth" });
 }
 
-function scrollUp(){
-    const firstPage = document.querySelector('#firstPage');
-    firstPage.scrollIntoView({ block: "start", inline: "nearest", behavior : "smooth" });
+function scrollToThird(){
+    const thirdPage = document.querySelector('#thirdPage');
+    thirdPage.scrollIntoView({ block: "start", inline: "nearest", behavior : "smooth" });
 }
+
 ///share to facebook button
 
 function karenShare(platformStr){

@@ -1,8 +1,8 @@
 //in order of what happens
 //fade in the splash 
 
-const openingWait = 10; //wait one second before fade in
-const splashLength = 30; // length of splash message
+const openingWait = 500; //wait one second before fade in
+const splashLength = 2000; // length of splash message
 
 
 //fades

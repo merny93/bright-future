@@ -29,7 +29,7 @@ function formatAnswers(zeAnswers) {
 function sendQuestion(prompt, callback) {
     let full_prompt = prompt_template + prompt + "\nA:";
     (async () => {
-        const url = 'https://api.openai.com/v1/engines/ada/completions';
+        const url = 'https://api.openai.com/v1/engines/curie/completions';
         const params = {
             "prompt": full_prompt,
             "max_tokens": 30,
@@ -79,9 +79,9 @@ function makeShare(infoObject){
 app.post('/future', async(req,res) =>{
     // console.log(req.body.text)
     // res.send(req.body)
-    setTimeout(() => {  res.send(JSON.stringify( ["Yes Daddy, I will do it", "No! I have been a naughty boi"]));}, 1000);
+    // setTimeout(() => {  res.send(JSON.stringify( ["Yes Daddy, I will do it", "No! I have been a naughty boi"]));}, 1000);
     // res.send(JSON.stringify(["hellop", "no"]));
-    // sendQuestion(req.body.text, res);
+    sendQuestion(req.body.text, res);
 });
 
 app.post('/share', async(req,res) =>{

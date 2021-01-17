@@ -69,11 +69,9 @@ main {
   border: none;
   border-bottom: 1px solid white;
   outline: none;
-  /* line-height: 1em; */
   font-family: 'Raleway';
   font-size: .65em;
   overflow-y: hidden;
-  /* TODO AUTO RESIZE when text is over one line long*/
 }
 
 textarea::-webkit-input-placeholder {
