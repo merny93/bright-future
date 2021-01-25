@@ -67,7 +67,7 @@ window.addEventListener('load', function () {
         
     });
     resultStars.addEventListener('transitionend', function() {
-        console.log("hi")
+        // console.log("hi")
         if (resultStars.style.opacity == "1"){
             //faded in
         } else {
@@ -139,15 +139,11 @@ function refreshMap(){
     let y = scrollable.scrollTop;
     if (y <= window.innerHeight / 2){
         // On page 1
-        console.log("On page 1")
     } else if (y <= 3 * window.innerHeight / 2) {
         // On page 2
-        
-        console.log("On page 2")
         document.getElementById("mapimage").src = imgSrc + new Date().getTime();
     } else {
         // On page 3
-        console.log("On page 3")
     }
     setTimeout(refreshMap, 2000);
 }

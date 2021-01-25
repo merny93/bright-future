@@ -142,7 +142,6 @@ function init() {
     //     // event.preventDefault();
     //     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     //     mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
-    //     // console.log(mouse);
     //     raycaster1.setFromCamera(mouse, camera);
     //     let intersects = raycaster1.intersectObjects(scene.children);
     //     if (intersects.length > 0) {
@@ -211,7 +210,6 @@ function init() {
             requestAnimationFrame(startSpeedup);
         }
         else {
-            console.log(camera.position.y);
             requestAnimationFrame(render);
         }
     }

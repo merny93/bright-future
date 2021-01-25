@@ -54,7 +54,7 @@ function submitQuestion() {
         return
     }
     let data = { text: questionPrompt };
-    console.log(data)
+    //console.log(data)
 
     let xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/future", true);
@@ -62,7 +62,7 @@ function submitQuestion() {
     xhttp.timeout = 2000;
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log("got the response")
+            // console.log("got the response")
             // Response
             let response = JSON.parse(this.responseText);
             if (response.length == 0){
@@ -74,7 +74,7 @@ function submitQuestion() {
                 'http://lwalab.phys.unm.edu/lwatv2/lwatv.png?nocache=1' + new Date().getTime(),
                 function (dataUrl) {
                     let madeHash = dataUrl.hashCode();
-                    console.log('HASH:', madeHash)
+                    // console.log('HASH:', madeHash)
                     displayResponse(questionPrompt, response, madeHash);
                     
                     //THIS IS WHERE THE OUTPUT IS
@@ -108,8 +108,8 @@ function displayResponse(questionPrompt, responseArray, hashVal){
     let starsChoice = Math.abs( hashVal% (responseArray.length));
 
     let finalResponse = responseArray[starsChoice];
-    console.log('RESULT:', starsChoice);
-    console.log(responseArray);
+    //console.log('RESULT:', starsChoice);
+    //console.log(responseArray);
     document.getElementById("answerholder").innerHTML = "<p class='questionholder'>"+questionPrompt+"</p><p>"+finalResponse+"</p>";
     //fade out its gonne handle the rest
     if (document.getElementById("loading").classList.contains('ready')){
@@ -163,7 +163,7 @@ function toDataURL(src, callback, outputFormat) {
   };
   img.src = src;
   if (img.complete || img.complete === undefined) {
-    console.log("stars are unavailable");
+    //console.log("stars are unavailable");
     callback(makeid(10));
   }
 }
@@ -205,7 +205,7 @@ function karenShare(platformStr){
         if (this.readyState == 4 && this.status == 200) {
             // Response
             let response = JSON.parse(this.responseText);
-            console.log(response);
+            //console.log(response);
             window.open(response);    
         }
     };
