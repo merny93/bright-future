@@ -46,6 +46,17 @@ function rewind(){
 function submitQuestion() {
     //create the request
     //we are sending a post request with a return promise
+
+     //get the input
+    let input = document.getElementById('questionarea');
+    let questionPrompt = input.value;
+    if (questionPrompt.length == 0) {
+        //no text entred so try again
+        return
+    }
+    let data = { text: questionPrompt };
+    console.log(data)
+
     let xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/future", true);
     xhttp.setRequestHeader("Content-Type", "application/json");
@@ -61,10 +72,10 @@ function submitQuestion() {
                     let madeHash = dataUrl.hashCode();
                     console.log('HASH:', madeHash)
                     let starsChoice = Math.abs( madeHash% (response.length));
-                    let finalResponse = response[starsChoice]
+                    let finalResponse = response[starsChoice];
                     console.log('RESULT:', starsChoice);
-                    console.log(response)
-                    document.getElementById("answerholder").innerHTML = finalResponse;
+                    console.log(response);
+                    document.getElementById("answerholder").innerHTML = "<p class='questionholder'>"+questionPrompt+"</p><p>"+finalResponse+"</p>";
                     //fade out its gonne handle the rest
                     if (document.getElementById("loading").classList.contains('ready')){
                         //the loading screen loaded in so we unload it
@@ -79,15 +90,6 @@ function submitQuestion() {
                 });
         }
     };
-    //get the input
-    let input = document.getElementById('questionarea');
-    let questionPrompt = input.value;
-    if (questionPrompt.length == 0) {
-        //no text entred so try again
-        return
-    }
-    let data = { text: questionPrompt };
-    console.log(data)
 
     //send it out
     xhttp.send(JSON.stringify(data));
