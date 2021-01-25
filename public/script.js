@@ -1,4 +1,3 @@
-
 const targetVelocity = .005;
 const factor = 50;
 let velocity = {v : targetVelocity};
@@ -60,10 +59,15 @@ function submitQuestion() {
     let xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/future", true);
     xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.timeout = 2000;
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
+            console.log("got the response")
             // Response
             let response = JSON.parse(this.responseText);
+            if (response.length == 0){
+                response = ["Stars seems unavailable at the moment"];
+            }
 
             // console.log(response)
             toDataURL(
@@ -71,26 +75,22 @@ function submitQuestion() {
                 function (dataUrl) {
                     let madeHash = dataUrl.hashCode();
                     console.log('HASH:', madeHash)
-                    let starsChoice = Math.abs( madeHash% (response.length));
-                    let finalResponse = response[starsChoice];
-                    console.log('RESULT:', starsChoice);
-                    console.log(response);
-                    document.getElementById("answerholder").innerHTML = "<p class='questionholder'>"+questionPrompt+"</p><p>"+finalResponse+"</p>";
-                    //fade out its gonne handle the rest
-                    if (document.getElementById("loading").classList.contains('ready')){
-                        //the loading screen loaded in so we unload it
-                        document.getElementById("loading").style.opacity = '0';
-                        document.getElementById("loading").classList.remove('ready');
-                    } else {
-                        // we set the html already so the other function will handle
-                    }
+                    displayResponse(questionPrompt, response, madeHash);
                     
                     //THIS IS WHERE THE OUTPUT IS
                     //curently logging to console
                 });
+        } else if (this.status == 429){
+            displayResponse(questionPrompt, ["Did you think that calling your realtives over seas was expensive? Imagine how expensive long distance is to the stars. Buy us a coffee to keep us afloat."], 1);
+        } else if (this.readyState == 4 && this.status >= 400){
+            //bad response
+            displayResponse(questionPrompt, ["Stars seems unavailable at the moment"], 1);
         }
     };
 
+    xhttp.ontimeout = function(){
+        displayResponse(questionPrompt, ["Stars seems unavailable at the moment"], 1);
+    }
     //send it out
     xhttp.send(JSON.stringify(data));
     // input.value = "";
@@ -102,6 +102,23 @@ function submitQuestion() {
     // TODO 
     // whatever CSS class switching (fade out/in stuff) needs to happen
 
+}
+
+function displayResponse(questionPrompt, responseArray, hashVal){
+    let starsChoice = Math.abs( hashVal% (responseArray.length));
+
+    let finalResponse = responseArray[starsChoice];
+    console.log('RESULT:', starsChoice);
+    console.log(responseArray);
+    document.getElementById("answerholder").innerHTML = "<p class='questionholder'>"+questionPrompt+"</p><p>"+finalResponse+"</p>";
+    //fade out its gonne handle the rest
+    if (document.getElementById("loading").classList.contains('ready')){
+        //the loading screen loaded in so we unload it
+        document.getElementById("loading").style.opacity = '0';
+        document.getElementById("loading").classList.remove('ready');
+    } else {
+        // we set the html already so the other function will handle
+    }
 }
   
 //detect the enter submission
@@ -147,10 +164,19 @@ function toDataURL(src, callback, outputFormat) {
   img.src = src;
   if (img.complete || img.complete === undefined) {
     console.log("stars are unavailable");
-    img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-    img.src = src;
+    callback(makeid(10));
   }
 }
+
+function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+ }
 
 function scrollToFirst(){
     const firstPage = document.querySelector('#firstPage');

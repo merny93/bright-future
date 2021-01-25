@@ -110,6 +110,8 @@ p {
   text-align: center;
   font-size: larger;
   text-shadow: .5px .5px #88bbe7;
+  width: 800px;
+  max-width: 75vw;
 }
 
 button {
@@ -256,7 +258,7 @@ a:hover {
 }
 
 img {
-  width: min(60vw, 600px);
+  width: min(60vw, 500px);
   padding: 1em;
   mix-blend-mode: screen;
   will-change: opacity;

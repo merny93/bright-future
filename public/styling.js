@@ -40,7 +40,6 @@ window.addEventListener('load', function () {
     //for when a question was sent to the server!
     querryArea.addEventListener('transitionend', function (){
         if (querryArea.style.opacity == '0'){
-            console.log("i triggered");
             //this means that the input was faded out
             querryArea.classList.add('hidden');
             //now fade in the waiting thing
@@ -136,12 +135,20 @@ window.addEventListener('load', refreshMap);
 function refreshMap(){
 
     let imgSrc = document.getElementById("mapimage").src
-
-    refreshWorker();
-
-    function refreshWorker(){
+    const scrollable = document.querySelector('#scrollable');
+    let y = scrollable.scrollTop;
+    if (y <= window.innerHeight / 2){
+        // On page 1
+        console.log("On page 1")
+    } else if (y <= 3 * window.innerHeight / 2) {
+        // On page 2
+        
+        console.log("On page 2")
         document.getElementById("mapimage").src = imgSrc + new Date().getTime();
-        setTimeout(refreshWorker, 2000);
+    } else {
+        // On page 3
+        console.log("On page 3")
     }
+    setTimeout(refreshMap, 2000);
 }
 
