@@ -66,7 +66,7 @@ function submitQuestion() {
             // Response
             let response = JSON.parse(this.responseText);
             if (response.length == 0){
-                response = ["Stars seems unavailable at the moment"];
+                response = ["Stars seem unavailable at the moment"];
             }
 
             // console.log(response)
@@ -84,12 +84,12 @@ function submitQuestion() {
             displayResponse(questionPrompt, ["Did you think that calling your realtives overseas was expensive? Imagine how expensive long distance is to the stars. <a href='https://www.buymeacoffee.com/inthestars' target='_blank'>Buy us a coffee</a> to keep us afloat!"], 1);
         } else if (this.readyState == 4 && this.status >= 400){
             //bad response
-            displayResponse(questionPrompt, ["Stars seems unavailable at the moment"], 1);
+            displayResponse(questionPrompt, ["Stars seem unavailable at the moment"], 1);
         }
     };
 
     xhttp.ontimeout = function(){
-        displayResponse(questionPrompt, ["Stars seems unavailable at the moment"], 1);
+        displayResponse(questionPrompt, ["Stars seem unavailable at the moment"], 1);
     }
     //send it out
     xhttp.send(JSON.stringify(data));
