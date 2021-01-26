@@ -59,7 +59,7 @@ function submitQuestion() {
     let xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/future", true);
     xhttp.setRequestHeader("Content-Type", "application/json");
-    xhttp.timeout = 2000;
+    xhttp.timeout = 4000;
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             // console.log("got the response")
