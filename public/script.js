@@ -40,6 +40,8 @@ function rewind(){
     }, 300)
 }
 
+const ErrorMsg = "Stars seem unavailable at the moment, please try again."
+
 //BIG boi function that sends request to backend 
 // gets choices back and chooses them based on the imgae hash
 function submitQuestion() {
@@ -66,7 +68,7 @@ function submitQuestion() {
             // Response
             let response = JSON.parse(this.responseText);
             if (response.length == 0){
-                response = ["Stars seem unavailable at the moment"];
+                response = [ErrorMsg];
             }
 
             // console.log(response)
@@ -84,12 +86,12 @@ function submitQuestion() {
             displayResponse(questionPrompt, ["Did you think that calling your realtives overseas was expensive? Imagine how expensive long distance is to the stars. <a href='https://www.buymeacoffee.com/inthestars' target='_blank'>Buy us a coffee</a> to keep us afloat!"], 1);
         } else if (this.readyState == 4 && this.status >= 400){
             //bad response
-            displayResponse(questionPrompt, ["Stars seem unavailable at the moment"], 1);
+            displayResponse(questionPrompt, [ErrorMsg], 1);
         }
     };
 
     xhttp.ontimeout = function(){
-        displayResponse(questionPrompt, ["Stars seem unavailable at the moment"], 1);
+        displayResponse(questionPrompt, [ErrorMsg], 1);
     }
     //send it out
     xhttp.send(JSON.stringify(data));
