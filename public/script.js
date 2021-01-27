@@ -4,6 +4,7 @@ let velocity = {v : targetVelocity};
 let speedTween;
 let slowTween;
 let timeout;
+let answer = "";
 
 speedTween  = new TWEEN.Tween(velocity).to({v : factor * targetVelocity}, 2000   ).easing(TWEEN.Easing.Quadratic.InOut);
 slowTween   = new TWEEN.Tween(velocity).to({v : targetVelocity},  800).easing(TWEEN.Easing.Quadratic.InOut);
@@ -110,6 +111,7 @@ function displayResponse(questionPrompt, responseArray, hashVal){
     let starsChoice = Math.abs( hashVal% (responseArray.length));
 
     let finalResponse = responseArray[starsChoice];
+    answer = finalResponse;
     //console.log('RESULT:', starsChoice);
     //console.log(responseArray);
     document.getElementById("answerholder").innerHTML = "<p class='questionholder'>"+questionPrompt+"</p><p>"+finalResponse+"</p>";
@@ -197,7 +199,7 @@ function scrollToThird(){
 
 ///share to facebook button
 
-function karenShare(platformStr){
+function mediaShare(platformStr){
     //create the request
     //we are sending a post request with a return promise
     let xhttp = new XMLHttpRequest();
@@ -211,6 +213,6 @@ function karenShare(platformStr){
             window.open(response);    
         }
     };
-    let data = {platform:platformStr, question: document.getElementById('questionarea').value, answer: document.getElementById("answerholder").innerHTML};
+    let data = {platform:platformStr, question: document.getElementById('questionarea').value, answer: answer};
     xhttp.send(JSON.stringify(data));
 }
