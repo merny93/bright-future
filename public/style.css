@@ -5,8 +5,13 @@ body, html {
   margin: 0;
 }
 
+html {
+  overflow: hidden;
+}
+
 body {
   overscroll-behavior: none;
+  overflow: auto;
 }
 
 canvas {
